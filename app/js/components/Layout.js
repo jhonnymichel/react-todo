@@ -17,9 +17,9 @@ export default class Layout extends React.Component {
     this.setState({todoList: this.todoList});
   }
   render() {
-    let title = this.state.title;
-    let description = this.state.description;
-    let TodoList = this.state.todoList.map((todo, i) => <p key={i}>{todo}</p>);
+    const title = this.state.title;
+    const description = this.state.description;
+    let TodoList = this.state.todoList.map((todo, i) => <p key={i}>{todo}</p>).reverse();
     console.log(TodoList);
     return (
       <div>

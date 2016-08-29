@@ -12,6 +12,7 @@ export default class AddBar extends React.Component {
     const todo = this.state.inputValue;
     if (todo != "") {
       this.props.callBack(todo);
+      this.setState({inputValue: ""});
     } else {
       alert ("conteúdo não pode estar vazio");
     }
