@@ -1,23 +1,14 @@
 import React from "react";
 
 export default class Header extends React.Component {
-  constructor () {
-    super();
-    this.state = {
-      title: "league of legends"
-    };
-    setTimeout(() => {
-      this.setState({
-        title: "Dotka"
-      });
-    }, 1000);
+  constructor (props) {
+    super(props);
   }
-
   render() {
     return (
       <header>
-        <h1>Welcome to {this.state.title}</h1>
-        <p>{this.props.title}</p>
+        <h1>{this.props.title}</h1>
+        <p>{this.props.description}</p>
       </header>
     );
   }
