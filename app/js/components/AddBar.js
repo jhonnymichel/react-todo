@@ -9,8 +9,9 @@ export default class AddBar extends React.Component {
     this.setState({inputValue: e.target.value});
   }
   addBtnClickHandler() {
-    if (this.state.inputValue != "") {
-      this.props.callBack();
+    const todo = this.state.inputValue;
+    if (todo != "") {
+      this.props.callBack(todo);
     } else {
       alert ("conteúdo não pode estar vazio");
     }

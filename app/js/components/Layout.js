@@ -7,19 +7,25 @@ export default class Layout extends React.Component {
     super();
     this.state = {
       title: "Xexeu's todo",
-      description: "Add a todo and try to accomplish 'em!'"
+      description: "Add a todo and try to accomplish 'em!'",
+      todoList: []
     }
+    this.todoList = [];
   }
-  onAddToDoClickHandler() {
-    alert("deu certo");
+  onAddToDoClickHandler(todo) {
+    this.todoList.push(todo);
+    this.setState({todoList: this.todoList});
   }
   render() {
     let title = this.state.title;
     let description = this.state.description;
+    let TodoList = this.state.todoList.map((todo, i) => <p key={i}>{todo}</p>);
+    console.log(TodoList);
     return (
       <div>
         <Header title={title} description={description}/>
         <AddBar callBack={this.onAddToDoClickHandler.bind(this)}/>
+        {TodoList}
       </div>
     );
   }
