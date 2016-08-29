@@ -10,21 +10,21 @@ export default class Layout extends React.Component {
       description: "Add a todo and try to accomplish 'em!'",
       todoList: []
     }
-    this.todoList = [];
   }
-  onAddToDoClickHandler(todo) {
-    this.todoList.push(todo);
-    this.setState({todoList: this.todoList});
+  receiveNewTodo(todo) {
+    let todoList = this.state.todoList;
+    todoList.push(todo);
+    this.setState({todoList});
   }
   render() {
     const title = this.state.title;
     const description = this.state.description;
-    let TodoList = this.state.todoList.map((todo, i) => <p key={i}>{todo}</p>).reverse();
-    console.log(TodoList);
+    let TodoList = this.state.todoList.map((todo, i) => <p key={i}>{todo}</p>)
+      .reverse();
     return (
       <div>
         <Header title={title} description={description}/>
-        <AddBar callBack={this.onAddToDoClickHandler.bind(this)}/>
+        <AddBar callBack={this.receiveNewTodo.bind(this)}/>
         {TodoList}
       </div>
     );

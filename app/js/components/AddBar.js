@@ -5,10 +5,10 @@ export default class AddBar extends React.Component {
     super(props);
     this.state = {inputValue: ""};
   }
-  changeInputValue(e) {
+  onInputChangeHandler(e) {
     this.setState({inputValue: e.target.value});
   }
-  addBtnClickHandler() {
+  onAddTodoClickHandler() {
     const todo = this.state.inputValue;
     if (todo != "") {
       this.props.callBack(todo);
@@ -20,8 +20,8 @@ export default class AddBar extends React.Component {
   render() {
     return (
       <div>
-        <input onChange={this.changeInputValue.bind(this)} value={this.state.inputValue}></input>
-        <button onClick={this.addBtnClickHandler.bind(this)} type="button">Add ToDo</button>
+        <input onChange={this.onInputChangeHandler.bind(this)} value={this.state.inputValue}></input>
+        <button onClick={this.onAddTodoClickHandler.bind(this)} type="button">Add ToDo</button>
       </div>
     );
   }
