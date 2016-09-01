@@ -6,7 +6,8 @@ export default class AddBar extends React.Component {
     this.state = {inputValue: ""};
   }
   onInputChangeHandler(e) {
-    this.setState({inputValue: e.target.value});
+    const inputValue = e.target.value;
+    this.setState({inputValue});
   }
   onAddTodoClickHandler() {
     const todo = this.state.inputValue;
