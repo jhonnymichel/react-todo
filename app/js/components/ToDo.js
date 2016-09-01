@@ -25,7 +25,7 @@ export default class ToDo extends React.Component {
   render() {
     const objStyle = this.state.objStyle;
     const clickCallback = this.fadeOut.bind(this);
-    const todoMesage = this.props.value;
+    const todoMessage = this.props.value;
     return (
       <div style={objStyle} onClick={clickCallback}>
         <p>{todoMessage}</p>
