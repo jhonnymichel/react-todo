@@ -6,7 +6,6 @@ import ToDoList from "./ToDoList";
 export default class Layout extends React.Component {
   constructor() {
     super();
-    this.idIncrementer = 0;
     this.state = {
       title: "Xexeu's todo",
       description: "Add a todo and try to accomplish 'em!'",
