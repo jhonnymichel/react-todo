@@ -4,3 +4,26 @@ body {
     display: flex;
     background: $blue;
 }
+
+.todo-container {
+  transition: opacity 0.4s ease-out, height 0.4s ease-out, padding 0.4s ease-out;
+  margin: 0;
+  padding: 20px 5px;
+  height: auto;
+  background-color: rgb(226, 226, 226);
+  border: 1px solid rgb(236, 63, 111);
+  overflow: hidden;
+  opacity: 1;
+  .todo-text {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: 'sans-serif';
+    font-size: 16px;
+  }
+}
+.todo-container-initial-state {
+  opacity: 0;
+  padding: 0px;
+  height: 0px;
+}

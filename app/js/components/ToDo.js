@@ -4,31 +4,41 @@ export default class ToDo extends React.Component {
 
   constructor(props) {
     super(props);
+    this.transitionCss = "todo-container todo-container-initial-state"
+    this.defaultCss = "todo-container";
     this.state = {
-      objStyle: {
-        transition: "opacity 0.4s ease-out, transform 0.4s ease-out",
-      }
+      css: this.transitionCss
     };
   }
-  fadeOut(onEndCallBack) {
-    let objStyle = {...this.state.objStyle};
-    objStyle.opacity = "0";
-    objStyle.transform = "translateX(50%)";
+  fadeOut() {
+    let css = {...this.state.css};
+    css = this.transitionCss;
     this.setState({
-      objStyle
+      css
     });
-    setTimeout(this.setAsDone.bind(this), 400);
+    this.DOMElement.addEventListener('transitionend', this.setAsDone.bind(this));
   }
   setAsDone() {
+    this.DOMElement.removeEventListener('transitionend', this.setAsDone.bind(this))
     this.props.deleteToDo(this.props.objId);
   }
+  componentDidMount() {
+    this.DOMElement = this.refs['thisDOMElement'];
+    setTimeout(()=>{
+      let css = {...this.state.css};
+      css = this.defaultCss;
+      this.setState({
+        css
+      });
+    },10)
+  }
   render() {
-    const objStyle = this.state.objStyle;
+    const { css } = this.state;
     const clickCallback = this.fadeOut.bind(this);
-    const todoMessage = this.props.value;
+    const { value } = this.props;
     return (
-      <div style={objStyle} onClick={clickCallback}>
-        <p>{todoMessage}</p>
+      <div className = {css} ref="thisDOMElement"onClick={clickCallback}>
+        <p className = "todo-text">{value}</p>
       </div>
     );
   }

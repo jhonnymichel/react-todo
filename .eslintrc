@@ -1,0 +1,10 @@
+{
+  "extends": "google",
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+      "linebreak-style": "off",
+      "react/jsx-uses-vars": [2]
+  }
+}

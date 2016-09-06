@@ -9,10 +9,10 @@ export default class Layout extends React.Component {
     this.state = {
       title: "Xexeu's todo",
       description: "Add a todo and try to accomplish 'em!'",
-    }
+    };
   }
   receiveNewTodo(todo) {
-    this.refs['todoList'].receiveNewTodo(todo);
+    this.refs.todoList.receiveNewTodo(todo);
   }
   render() {
     const {title, description} = this.state;

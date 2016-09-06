@@ -13,13 +13,15 @@ export default class ToDoList extends React.Component {
     let todoList = [...this.state.todoList];
     todoList.push({
       text: todo,
-      id: "todo"+this.idIncrementer++
+      id: this.idIncrementer++,
     });
     this.setState({todoList});
   }
   deleteToDo(key) {
-    let todoList = this.state.todoList.filter((todo) => todo.id != key);
+    const todoList = this.state.todoList.filter((todo) => todo.id != key);
     this.setState({todoList});
+    this.transformDirection = 1;
+    this.deletedToDo = key;
   }
   render() {
     let TodoList = this.state.todoList.map((todo, i) =>
@@ -28,7 +30,8 @@ export default class ToDoList extends React.Component {
       value={todo.text}
       deleteToDo={this.deleteToDo.bind(this)}/>
     ).reverse();
-
+    this.transformDirection = 0;
+    this.deletedToDo = null;
     return (
       <div>
         {TodoList}

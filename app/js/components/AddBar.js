@@ -11,11 +11,11 @@ export default class AddBar extends React.Component {
   }
   onAddTodoClickHandler() {
     const todo = this.state.inputValue;
-    if (todo != "") {
+    if (todo === "") {
+      alert ("conteúdo não pode estar vazio");
+    } else {
       this.props.callBack(todo);
       this.setState({inputValue: ""});
-    } else {
-      alert ("conteúdo não pode estar vazio");
     }
   }
   render() {
