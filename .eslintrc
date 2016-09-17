@@ -5,6 +5,7 @@
   ],
   "rules": {
       "linebreak-style": "off",
-      "react/jsx-uses-vars": [2]
+      "react/jsx-uses-vars": [2],
+      "object-curly-spacing": ["error", "always"]
   }
 }

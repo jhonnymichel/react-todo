@@ -3,26 +3,29 @@ import React from "react";
 export default class AddBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {inputValue: ""};
+    this.state = { inputValue: "" };
   }
   onInputChangeHandler(e) {
     const inputValue = e.target.value;
-    this.setState({inputValue});
+    this.setState({ inputValue });
   }
   onAddTodoClickHandler() {
     const todo = this.state.inputValue;
     if (todo === "") {
-      alert ("conteúdo não pode estar vazio");
+      alert("conteúdo não pode estar vazio");
     } else {
       this.props.callBack(todo);
-      this.setState({inputValue: ""});
+      this.setState({ inputValue: "" });
     }
   }
   render() {
+    const onChangeHandler = this.onInputChangeHandler.bind(this);
+    const onClickHandler = this.onAddTodoClickHandler.bind(this);
+    let value = this.state.inputValue;
     return (
       <div>
-        <input onChange={this.onInputChangeHandler.bind(this)} value={this.state.inputValue}></input>
-        <button onClick={this.onAddTodoClickHandler.bind(this)} type="button">Add ToDo</button>
+        <input onChange={ onChangeHandler } value={ value }></input>
+        <button onClick={ onClickHandler } type="button">Add ToDo</button>
       </div>
     );
   }
