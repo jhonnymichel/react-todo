@@ -40,7 +40,7 @@ export default class ToDo extends React.Component {
 
   render() {
     let { css } = this.state;
-    let clickCallback = this.fadeOut.bind(this);
+    const clickCallback = this.fadeOut.bind(this);
     let { value } = this.props;
     return (
       <div className = {css} ref="thisDOMElement"onClick={clickCallback}>

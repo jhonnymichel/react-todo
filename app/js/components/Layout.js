@@ -15,7 +15,7 @@ export default class Layout extends React.Component {
     this.refs.todoList.receiveNewTodo(todo);
   }
   render() {
-    const { title, description } = this.state;
+    let { title, description } = this.state;
     const callBack = this.receiveNewTodo.bind(this);
 
     return (
