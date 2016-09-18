@@ -20,8 +20,10 @@ export default class Layout extends React.Component {
 
     return (
       <div>
-        <Header title={title} description={description}/>
-        <AddBar callBack={callBack}/>
+        <div className="header-wrapper">
+          <Header title={title} description={description}/>
+          <AddBar callBack={callBack}/>
+        </div>
         <ToDoList ref="todoList" />
       </div>
     );

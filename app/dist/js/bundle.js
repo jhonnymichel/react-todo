@@ -21526,8 +21526,12 @@
 	      return _react2.default.createElement(
 	        "div",
 	        null,
-	        _react2.default.createElement(_Header2.default, { title: title, description: description }),
-	        _react2.default.createElement(_AddBar2.default, { callBack: callBack }),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "header-wrapper" },
+	          _react2.default.createElement(_Header2.default, { title: title, description: description }),
+	          _react2.default.createElement(_AddBar2.default, { callBack: callBack })
+	        ),
 	        _react2.default.createElement(_ToDoList2.default, { ref: "todoList" })
 	      );
 	    }
