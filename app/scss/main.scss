@@ -11,7 +11,7 @@ body {
   text-shadow: 1px 1px black;
 }
 
-.app-header {
+.header {
   width: 100%;
   display: flex;
   flex-flow: column wrap;
@@ -59,7 +59,7 @@ body {
   }
 }
 
-.todo-container {
+.todo-list__todo {
   width: 50%;
   margin-top: 10px;
   transition: opacity 0.2s ease-out, height 0.2s ease-out, padding 0.2s ease-out;
@@ -70,7 +70,7 @@ body {
   border: 1px solid rgb(236, 63, 111);
   overflow: hidden;
   opacity: 1;
-  .todo-text {
+  .todo-list__todo--text {
     margin: 0;
     padding: 0;
     color: white;
@@ -78,7 +78,7 @@ body {
     font-size: 16px;
   }
 }
-.todo-container-initial-state {
+.todo-list__todo--initial-state {
   opacity: 0;
   padding: 0px;
   height: 0px;

@@ -37,7 +37,7 @@ export default class ToDoList extends React.Component {
     this.transformDirection = 0;
     this.deletedToDo = null;
     return (
-      <div>
+      <div className="todo-list">
         {TodoList}
       </div>
     );

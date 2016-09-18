@@ -22,10 +22,13 @@ export default class AddBar extends React.Component {
     const onChangeHandler = this.onInputChangeHandler.bind(this);
     const onClickHandler = this.onAddTodoClickHandler.bind(this);
     let value = this.state.inputValue;
+    let ph = "What todo?";
     return (
       <div className="add-bar">
-        <input onChange={ onChangeHandler } value={ value }></input>
-        <button onClick={ onClickHandler } type="button">Add ToDo</button>
+        <input placeholder={ ph } onChange={ onChangeHandler } value={ value }>
+        </input>
+        <button onClick={ onClickHandler } type="button">Add ToDo
+        </button>
       </div>
     );
   }

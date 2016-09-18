@@ -4,8 +4,8 @@ export default class ToDo extends React.Component {
 
   constructor(props) {
     super(props);
-    this.transitionCss = "todo-container todo-container-initial-state";
-    this.defaultCss = "todo-container";
+    this.transitionCss = "todo-list__todo todo-list__todo--initial-state";
+    this.defaultCss = "todo-list__todo";
     this.state = {
       css: this.transitionCss
     };
@@ -44,7 +44,7 @@ export default class ToDo extends React.Component {
     let { value } = this.props;
     return (
       <div className = {css} ref="thisDOMElement"onClick={clickCallback}>
-        <p className = "todo-text">{value}</p>
+        <p className = "todo-list__todo--text">{value}</p>
       </div>
     );
   }

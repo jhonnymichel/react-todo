@@ -21580,15 +21580,15 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        "header",
-	        { className: "app-header" },
+	        { className: "header" },
 	        _react2.default.createElement(
 	          "h1",
-	          null,
+	          { className: "header__title" },
 	          this.props.title
 	        ),
 	        _react2.default.createElement(
 	          "p",
-	          null,
+	          { className: "header__description" },
 	          this.props.description
 	        )
 	      );
@@ -21659,10 +21659,11 @@
 	      var onChangeHandler = this.onInputChangeHandler.bind(this);
 	      var onClickHandler = this.onAddTodoClickHandler.bind(this);
 	      var value = this.state.inputValue;
+	      var ph = "What todo?";
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "add-bar" },
-	        _react2.default.createElement("input", { onChange: onChangeHandler, value: value }),
+	        _react2.default.createElement("input", { placeholder: ph, onChange: onChangeHandler, value: value }),
 	        _react2.default.createElement(
 	          "button",
 	          { onClick: onClickHandler, type: "button" },
@@ -21757,7 +21758,7 @@
 	      this.deletedToDo = null;
 	      return _react2.default.createElement(
 	        "div",
-	        null,
+	        { className: "todo-list" },
 	        TodoList
 	      );
 	    }
@@ -21802,8 +21803,8 @@
 
 	    var _this = _possibleConstructorReturn(this, (ToDo.__proto__ || Object.getPrototypeOf(ToDo)).call(this, props));
 
-	    _this.transitionCss = "todo-container todo-container-initial-state";
-	    _this.defaultCss = "todo-container";
+	    _this.transitionCss = "todo-list__todo todo-list__todo--initial-state";
+	    _this.defaultCss = "todo-list__todo";
 	    _this.state = {
 	      css: _this.transitionCss
 	    };
@@ -21853,7 +21854,7 @@
 	        { className: css, ref: "thisDOMElement", onClick: clickCallback },
 	        _react2.default.createElement(
 	          "p",
-	          { className: "todo-text" },
+	          { className: "todo-list__todo--text" },
 	          value
 	        )
 	      );
