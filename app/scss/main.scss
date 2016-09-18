@@ -1,8 +1,30 @@
 @import "colors";
 
 body {
-    display: flex;
     background: $blue;
+    font-family: sans-serif;
+  }
+
+.text-shadow {
+  text-shadow: 1px 1px black;
+}
+
+.app-header {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  height: 300px;
+  background: rgb(93, 192, 255);
+  h1 {
+    @extend .text-shadow;
+    padding: 20px;
+    text-transform: uppercase;
+    color: white;
+  }
+  p {
+    @extend .text-shadow;
+    color: white;
+  }
 }
 
 .todo-container {

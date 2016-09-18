@@ -60,9 +60,11 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// eslint-disable-line no-unused-vars
 	document.addEventListener('DOMContentLoaded', onLoadHandler);
 
 	function onLoadHandler() {
+	  //eslint-disable-line
 	  _reactDom2.default.render(_react2.default.createElement(_Layout2.default, null), document.getElementById('app'));
 	}
 
@@ -21510,7 +21512,7 @@
 	  _createClass(Layout, [{
 	    key: "receiveNewTodo",
 	    value: function receiveNewTodo(todo) {
-	      this.refs['todoList'].receiveNewTodo(todo);
+	      this.refs.todoList.receiveNewTodo(todo);
 	    }
 	  }, {
 	    key: "render",
@@ -21563,10 +21565,10 @@
 	var Header = function (_React$Component) {
 	  _inherits(Header, _React$Component);
 
-	  function Header(props) {
+	  function Header() {
 	    _classCallCheck(this, Header);
 
-	    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
+	    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
 	  }
 
 	  _createClass(Header, [{
@@ -21574,7 +21576,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        "header",
-	        null,
+	        { className: "app-header" },
 	        _react2.default.createElement(
 	          "h1",
 	          null,
@@ -21640,23 +21642,26 @@
 	    key: "onAddTodoClickHandler",
 	    value: function onAddTodoClickHandler() {
 	      var todo = this.state.inputValue;
-	      if (todo != "") {
+	      if (todo === "") {
+	        alert("conteúdo não pode estar vazio");
+	      } else {
 	        this.props.callBack(todo);
 	        this.setState({ inputValue: "" });
-	      } else {
-	        alert("conteúdo não pode estar vazio");
 	      }
 	    }
 	  }, {
 	    key: "render",
 	    value: function render() {
+	      var onChangeHandler = this.onInputChangeHandler.bind(this);
+	      var onClickHandler = this.onAddTodoClickHandler.bind(this);
+	      var value = this.state.inputValue;
 	      return _react2.default.createElement(
 	        "div",
-	        null,
-	        _react2.default.createElement("input", { onChange: this.onInputChangeHandler.bind(this), value: this.state.inputValue }),
+	        { className: "add-bar" },
+	        _react2.default.createElement("input", { onChange: onChangeHandler, value: value }),
 	        _react2.default.createElement(
 	          "button",
-	          { onClick: this.onAddTodoClickHandler.bind(this), type: "button" },
+	          { onClick: onClickHandler, type: "button" },
 	          "Add ToDo"
 	        )
 	      );
@@ -21727,7 +21732,7 @@
 	    key: "deleteToDo",
 	    value: function deleteToDo(key) {
 	      var todoList = this.state.todoList.filter(function (todo) {
-	        return todo.id != key;
+	        return todo.id !== key;
 	      });
 	      this.setState({ todoList: todoList });
 	      this.transformDirection = 1;
@@ -21793,13 +21798,10 @@
 
 	    var _this = _possibleConstructorReturn(this, (ToDo.__proto__ || Object.getPrototypeOf(ToDo)).call(this, props));
 
-	    console.log('constructe');
-	    _this.willAnimateAfterUpdate = false;
-	    _this.defaultTransition = "opacity 0.4s ease-out, height 0.4s ease-out, padding 0.4s ease-out";
+	    _this.transitionCss = "todo-container todo-container-initial-state";
+	    _this.defaultCss = "todo-container";
 	    _this.state = {
-	      objStyle: {
-	        transition: _this.defaultTransition
-	      }
+	      css: _this.transitionCss
 	    };
 	    return _this;
 	  }
@@ -21807,13 +21809,10 @@
 	  _createClass(ToDo, [{
 	    key: "fadeOut",
 	    value: function fadeOut() {
-	      var objStyle = _extends({}, this.state.objStyle);
-	      objStyle.transition = this.defaultTransition;
-	      objStyle.opacity = "0";
-	      objStyle.height = "0px";
-	      objStyle.padding = "0px";
+	      var css = _extends({}, this.state.css);
+	      css = this.transitionCss;
 	      this.setState({
-	        objStyle: objStyle
+	        css: css
 	      });
 	      this.DOMElement.addEventListener('transitionend', this.setAsDone.bind(this));
 	    }
@@ -21826,19 +21825,28 @@
 	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
-	      this.DOMElement = this.refs['thisDOMElement'];
+	      var _this2 = this;
+
+	      this.DOMElement = this.refs.thisDOMElement;
+	      setTimeout(function () {
+	        var css = _extends({}, _this2.state.css);
+	        css = _this2.defaultCss;
+	        _this2.setState({
+	          css: css
+	        });
+	      }, 10);
 	    }
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      var objStyle = this.state.objStyle;
+	      var css = this.state.css;
 
 	      var clickCallback = this.fadeOut.bind(this);
 	      var value = this.props.value;
 
 	      return _react2.default.createElement(
 	        "div",
-	        { className: "todo-container", ref: "thisDOMElement", style: objStyle, onClick: clickCallback },
+	        { className: css, ref: "thisDOMElement", onClick: clickCallback },
 	        _react2.default.createElement(
 	          "p",
 	          { className: "todo-text" },
