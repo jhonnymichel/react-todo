@@ -23,8 +23,6 @@ export default class ToDoList extends React.Component {
   deleteToDo(key) {
     let todoList = this.state.todoList.filter(todo => todo.id !== key);
     this.setState({ todoList });
-    this.transformDirection = 1;
-    this.deletedToDo = key;
   }
 
   render() {
@@ -34,8 +32,6 @@ export default class ToDoList extends React.Component {
       value={todo.text}
       deleteToDo={this.deleteToDo.bind(this)}/>
     ).reverse();
-    this.transformDirection = 0;
-    this.deletedToDo = null;
     return (
       <div className="todo-list">
         {TodoList}

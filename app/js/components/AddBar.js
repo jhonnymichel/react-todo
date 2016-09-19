@@ -25,9 +25,12 @@ export default class AddBar extends React.Component {
     let ph = "What todo?";
     return (
       <div className="add-bar">
-        <input placeholder={ ph } onChange={ onChangeHandler } value={ value }>
+        <input className="add-bar__text-field"
+          placeholder={ ph } onChange={ onChangeHandler } value={ value }>
         </input>
-        <button onClick={ onClickHandler } type="button">Add ToDo
+        <button className="add-bar__send-button"
+          onClick={ onClickHandler } type="button">
+          Add ToDo
         </button>
       </div>
     );

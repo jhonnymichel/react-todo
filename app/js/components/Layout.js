@@ -11,9 +11,11 @@ export default class Layout extends React.Component {
       description: "Add a todo and try to accomplish 'em!'"
     };
   }
+
   receiveNewTodo(todo) {
     this.refs.todoList.receiveNewTodo(todo);
   }
+
   render() {
     let { title, description } = this.state;
     const callBack = this.receiveNewTodo.bind(this);
@@ -28,4 +30,5 @@ export default class Layout extends React.Component {
       </div>
     );
   }
+
 }

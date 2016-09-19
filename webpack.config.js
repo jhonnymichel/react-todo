@@ -13,7 +13,7 @@ module.exports = {
   },
   output: {
     path: __dirname +'/app/dist/js',
-    publicPath: "/dist/js/", //the path to the webserver
+    publicPath: "./dist/js/", //the path to the webserver
     filename: 'bundle.js'
   },
   module: {
@@ -29,6 +29,10 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style-loader', String(cssLoaderSetup+'!'+postcssLoaderStup+'!'+sassLoaderSetup))
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader'
       }
     ]
   },
