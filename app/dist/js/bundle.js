@@ -21872,7 +21872,7 @@
 	        "div",
 	        { className: css, ref: "thisDOMElement", onClick: clickCallback },
 	        _react2.default.createElement(
-	          "p",
+	          "h4",
 	          { className: "todo-list__todo--text" },
 	          value
 	        )

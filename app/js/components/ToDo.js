@@ -44,7 +44,7 @@ export default class ToDo extends React.Component {
     let { value } = this.props;
     return (
       <div className = {css} ref="thisDOMElement"onClick={clickCallback}>
-        <p className = "todo-list__todo--text">{value}</p>
+        <h4 className = "todo-list__todo--text">{value}</h4>
       </div>
     );
   }
