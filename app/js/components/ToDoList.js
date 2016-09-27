@@ -25,6 +25,16 @@ export default class ToDoList extends React.Component {
     this.setState({ todoList });
   }
 
+  renderEmptyMessage(todoAmount) {
+    if (todoAmount === 0) {
+      return (
+        <h4 className="todo-list__empty-message">
+          Are you sure you don't have nothing to do?
+        </h4>
+      );
+    }
+  }
+
   render() {
     let TodoList = this.state.todoList.map((todo, i) =>
       <ToDo key={todo.id}
@@ -34,6 +44,7 @@ export default class ToDoList extends React.Component {
     ).reverse();
     return (
       <div className="todo-list">
+        {this.renderEmptyMessage(TodoList.length)}
         {TodoList}
       </div>
     );

@@ -1,5 +1,5 @@
 @import "colors";
-@import "header";
+@import "./header/header";
 @import "todo-list";
 body {
     background: $blue;

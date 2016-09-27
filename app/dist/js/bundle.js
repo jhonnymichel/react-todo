@@ -21745,6 +21745,17 @@
 	      this.setState({ todoList: todoList });
 	    }
 	  }, {
+	    key: "renderEmptyMessage",
+	    value: function renderEmptyMessage(todoAmount) {
+	      if (todoAmount === 0) {
+	        return _react2.default.createElement(
+	          "h4",
+	          { className: "todo-list__empty-message" },
+	          "Are you sure you don't have nothing to do?"
+	        );
+	      }
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
 	      var _this2 = this;
@@ -21758,6 +21769,7 @@
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "todo-list" },
+	        this.renderEmptyMessage(TodoList.length),
 	        TodoList
 	      );
 	    }

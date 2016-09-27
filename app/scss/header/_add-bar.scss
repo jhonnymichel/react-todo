@@ -1,0 +1,26 @@
+.add-bar {
+  overflow: hidden;
+  border-radius: 5px 5px 0px 0px;
+  width: 50%;
+  display: flex;
+  flex-wrap: nowrap;
+  position: absolute;
+  bottom: 0;
+  .add-bar__text-field {
+    border-radius: 5px 0px 0px 0px;
+    border: none;
+    width: 100%;
+    display: inline-block;
+    padding: 10px 20px;
+  }
+  .add-bar__send-button {
+    display: inline-block;
+    min-width: 150px;
+    border: none;
+    background-color: rgb(228, 140, 49);
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    padding: 20px 30px;
+  }
+}
