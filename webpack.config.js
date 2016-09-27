@@ -13,7 +13,7 @@ module.exports = {
   },
   output: {
     path: __dirname +'/app/dist/js',
-    publicPath: "./dist/js/", //the path to the webserver
+    publicPath: "/", //the path to the webserver
     filename: 'bundle.js'
   },
   module: {
