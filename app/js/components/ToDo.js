@@ -7,8 +7,30 @@ export default class ToDo extends React.Component {
     this.transitionCss = "todo-list__todo todo-list__todo--initial-state";
     this.defaultCss = "todo-list__todo";
     this.state = {
-      css: this.transitionCss
+      css: this.transitionCss,
+      details: [],
+      expandCallback: this.expand.bind(this)
     };
+  }
+
+  expand() {
+    let { details, expandCallback } = this.state;
+    details = [
+      { title: 'created: ', value: '20/09/2016' }
+    ];
+    expandCallback = this.contract.bind(this);
+    this.setState({
+      details, expandCallback
+    });
+  }
+
+  contract() {
+    let { details, expandCallback } = this.state;
+    details = [];
+    expandCallback = this.expand.bind(this);
+    this.setState({
+      details, expandCallback
+    });
   }
 
   fadeOut() {
@@ -39,12 +61,20 @@ export default class ToDo extends React.Component {
   }
 
   render() {
-    let { css } = this.state;
+    let { css, details, expandCallback } = this.state;
     const clickCallback = this.fadeOut.bind(this);
     let { value } = this.props;
+    let infos = details.map((info, i) =>
+              <div>
+                  <h5>{info.title}</h5>
+                  <p>{info.value}</p>
+              </div>
+            );
     return (
-      <div className = {css} ref="thisDOMElement"onClick={clickCallback}>
+      <div className = {css} ref="thisDOMElement"
+        onDoubleClick={clickCallback} onClick={expandCallback}>
         <h4 className = "todo-list__todo--text">{value}</h4>
+        {infos}
       </div>
     );
   }
