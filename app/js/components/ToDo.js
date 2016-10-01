@@ -60,31 +60,45 @@ export default class ToDo extends React.Component {
     }, 10);
   }
 
+  renderToDoDetails() {
+    return this.state.details.map((info, i) =>
+      <div>
+          <h5>{info.title}</h5>
+          <p>{info.value}</p>
+      </div>
+    );
+  }
+
+  renderButtons() {
+    let action = this.state.expandCallback;
+    const deleteToDo = this.fadeOut.bind(this);
+    return (
+      <div className = "todo-actions">
+        <button onClick={action} className="todo-actions__button">
+          <i className="todo-actions__icon fa fa-plus"></i>
+        </button>
+        <button className="todo-actions__button">
+          <i className="todo-actions__icon fa fa-check"></i>
+        </button>
+        <button onClick={deleteToDo} className="todo-actions__button">
+          <i className="todo-actions__icon fa fa-trash-o"></i>
+        </button>
+      </div>
+    );
+  }
+
   render() {
-    let { css, details, expandCallback } = this.state;
-    const clickCallback = this.fadeOut.bind(this);
+    let { css } = this.state;
     let { value } = this.props;
-    let infos = details.map((info, i) =>
-              <div>
-                  <h5>{info.title}</h5>
-                  <p>{info.value}</p>
-              </div>
-            );
+    let infos = this.renderToDoDetails();
+    let buttons = this.renderButtons();
+    const clickCallback = this.fadeOut.bind(this);
+
     return (
       <div className = {css} ref="thisDOMElement"
-        onDoubleClick={clickCallback} onClick={expandCallback}>
+        onDoubleClick={clickCallback}>
         <h4 className = "todo-list__todo--text">{value}</h4>
-        <div className = "todo-actions">
-          <button className="todo-actions__button">
-            <i className="todo-actions__icon fa fa-plus"></i>
-          </button>
-          <button className="todo-actions__button">
-            <i className="todo-actions__icon fa fa-check"></i>
-          </button>
-          <button className="todo-actions__button">
-            <i className="todo-actions__icon fa fa-trash-o"></i>
-          </button>
-        </div>
+        {buttons}
         {infos}
       </div>
     );

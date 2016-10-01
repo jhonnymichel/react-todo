@@ -21905,17 +21905,9 @@
 	      }, 10);
 	    }
 	  }, {
-	    key: "render",
-	    value: function render() {
-	      var _state3 = this.state;
-	      var css = _state3.css;
-	      var details = _state3.details;
-	      var expandCallback = _state3.expandCallback;
-
-	      var clickCallback = this.fadeOut.bind(this);
-	      var value = this.props.value;
-
-	      var infos = details.map(function (info, i) {
+	    key: "renderToDoDetails",
+	    value: function renderToDoDetails() {
+	      return this.state.details.map(function (info, i) {
 	        return _react2.default.createElement(
 	          "div",
 	          null,
@@ -21931,34 +21923,52 @@
 	          )
 	        );
 	      });
+	    }
+	  }, {
+	    key: "renderButtons",
+	    value: function renderButtons() {
+	      var action = this.state.expandCallback;
+	      var deleteToDo = this.fadeOut.bind(this);
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "todo-actions" },
+	        _react2.default.createElement(
+	          "button",
+	          { onClick: action, className: "todo-actions__button" },
+	          _react2.default.createElement("i", { className: "todo-actions__icon fa fa-plus" })
+	        ),
+	        _react2.default.createElement(
+	          "button",
+	          { className: "todo-actions__button" },
+	          _react2.default.createElement("i", { className: "todo-actions__icon fa fa-check" })
+	        ),
+	        _react2.default.createElement(
+	          "button",
+	          { onClick: deleteToDo, className: "todo-actions__button" },
+	          _react2.default.createElement("i", { className: "todo-actions__icon fa fa-trash-o" })
+	        )
+	      );
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      var css = this.state.css;
+	      var value = this.props.value;
+
+	      var infos = this.renderToDoDetails();
+	      var buttons = this.renderButtons();
+	      var clickCallback = this.fadeOut.bind(this);
+
 	      return _react2.default.createElement(
 	        "div",
 	        { className: css, ref: "thisDOMElement",
-	          onDoubleClick: clickCallback, onClick: expandCallback },
+	          onDoubleClick: clickCallback },
 	        _react2.default.createElement(
 	          "h4",
 	          { className: "todo-list__todo--text" },
 	          value
 	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "todo-actions" },
-	          _react2.default.createElement(
-	            "button",
-	            { className: "todo-actions__button" },
-	            _react2.default.createElement("i", { className: "todo-actions__icon fa fa-plus" })
-	          ),
-	          _react2.default.createElement(
-	            "button",
-	            { className: "todo-actions__button" },
-	            _react2.default.createElement("i", { className: "todo-actions__icon fa fa-check" })
-	          ),
-	          _react2.default.createElement(
-	            "button",
-	            { className: "todo-actions__button" },
-	            _react2.default.createElement("i", { className: "todo-actions__icon fa fa-trash-o" })
-	          )
-	        ),
+	        buttons,
 	        infos
 	      );
 	    }
