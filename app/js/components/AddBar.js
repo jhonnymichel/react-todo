@@ -9,8 +9,10 @@ export default class AddBar extends React.Component {
     const inputValue = e.target.value;
     this.setState({ inputValue });
   }
-  onAddTodoClickHandler() {
+  onAddTodoClickHandler(e) {
+    e.preventDefault();
     const todo = this.state.inputValue;
+
     if (todo === "") {
       alert("conteúdo não pode estar vazio");
     } else {
@@ -23,16 +25,16 @@ export default class AddBar extends React.Component {
     const onClickHandler = this.onAddTodoClickHandler.bind(this);
     let value = this.state.inputValue;
     let ph = "What todo?";
+
     return (
-      <div className="add-bar">
+      <form className="add-bar" onSubmit={onClickHandler}>
         <input className="add-bar__text-field"
           placeholder={ ph } onChange={ onChangeHandler } value={ value }>
         </input>
-        <button className="add-bar__send-button"
-          onClick={ onClickHandler } type="button">
+        <button className="add-bar__send-button">
           Add ToDo
         </button>
-      </div>
+      </form>
     );
   }
 }

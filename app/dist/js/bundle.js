@@ -21669,8 +21669,10 @@
 	    }
 	  }, {
 	    key: "onAddTodoClickHandler",
-	    value: function onAddTodoClickHandler() {
+	    value: function onAddTodoClickHandler(e) {
+	      e.preventDefault();
 	      var todo = this.state.inputValue;
+
 	      if (todo === "") {
 	        alert("conteúdo não pode estar vazio");
 	      } else {
@@ -21685,15 +21687,15 @@
 	      var onClickHandler = this.onAddTodoClickHandler.bind(this);
 	      var value = this.state.inputValue;
 	      var ph = "What todo?";
+
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "add-bar" },
+	        "form",
+	        { className: "add-bar", onSubmit: onClickHandler },
 	        _react2.default.createElement("input", { className: "add-bar__text-field",
 	          placeholder: ph, onChange: onChangeHandler, value: value }),
 	        _react2.default.createElement(
 	          "button",
-	          { className: "add-bar__send-button",
-	            onClick: onClickHandler, type: "button" },
+	          { className: "add-bar__send-button" },
 	          "Add ToDo"
 	        )
 	      );
