@@ -74,6 +74,17 @@ export default class ToDo extends React.Component {
       <div className = {css} ref="thisDOMElement"
         onDoubleClick={clickCallback} onClick={expandCallback}>
         <h4 className = "todo-list__todo--text">{value}</h4>
+        <div className = "todo-actions">
+          <button className="todo-actions__button">
+            <i className="todo-actions__icon fa fa-plus"></i>
+          </button>
+          <button className="todo-actions__button">
+            <i className="todo-actions__icon fa fa-check"></i>
+          </button>
+          <button className="todo-actions__button">
+            <i className="todo-actions__icon fa fa-trash-o"></i>
+          </button>
+        </div>
         {infos}
       </div>
     );

@@ -21940,6 +21940,25 @@
 	          { className: "todo-list__todo--text" },
 	          value
 	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "todo-actions" },
+	          _react2.default.createElement(
+	            "button",
+	            { className: "todo-actions__button" },
+	            _react2.default.createElement("i", { className: "todo-actions__icon fa fa-plus" })
+	          ),
+	          _react2.default.createElement(
+	            "button",
+	            { className: "todo-actions__button" },
+	            _react2.default.createElement("i", { className: "todo-actions__icon fa fa-check" })
+	          ),
+	          _react2.default.createElement(
+	            "button",
+	            { className: "todo-actions__button" },
+	            _react2.default.createElement("i", { className: "todo-actions__icon fa fa-trash-o" })
+	          )
+	        ),
 	        infos
 	      );
 	    }
