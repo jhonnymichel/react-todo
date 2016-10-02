@@ -20,15 +20,22 @@ export default class ToDo extends React.Component {
   }
 
   expand() {
+    this.initialY = this.DOMElement.getBoundingClientRect().top +
+    this.DOMElement.getBoundingClientRect().height * 0.5;
+    this.finalY = 0;
     this.DOMElement.dispatchEvent(this.modalEvent);
     let { details, expandCallback, css } = this.state;
+    let styles = {
+      transform: 'translateY(' + (this.finalY - this.initialY) + 'px)'
+    };
+    console.log("styles are ", styles, this.finalY, this.initialY);
     details = [
       { title: 'created: ', value: '20/09/2016' }
     ];
     expandCallback = this.contract.bind(this);
     css = this.expandedCss;
     this.setState({
-      details, expandCallback, css
+      details, expandCallback, css, styles
     });
   }
 
@@ -39,7 +46,7 @@ export default class ToDo extends React.Component {
     expandCallback = this.expand.bind(this);
     css = this.defaultCss;
     this.setState({
-      details, expandCallback, css
+      details, expandCallback, css, styles: {}
     });
   }
 
@@ -99,14 +106,14 @@ export default class ToDo extends React.Component {
   }
 
   render() {
-    let { css } = this.state;
+    let { css, styles } = this.state;
     let { value } = this.props;
     let infos = this.renderToDoDetails();
     let buttons = this.renderButtons();
     const clickCallback = this.state.expandCallback;
 
     return (
-      <div className = {css} ref="thisDOMElement"
+      <div className = {css} style={styles} ref="thisDOMElement"
         onClick={clickCallback}>
         <h4 className = "todo__text">{value}</h4>
         {buttons}

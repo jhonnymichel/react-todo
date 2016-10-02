@@ -10,7 +10,7 @@
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  transition: opacity 0.2s ease-out, height 0.2s ease-out, padding 0.2s ease-out, transform 0.2s ease-out;
+  transition: opacity 0.2s ease-out, height 0.2s ease-out, padding 0.2s ease-out, transform .3s ease-out;
   width: 100%;
   padding: 20px 5px;
   overflow: hidden;
@@ -64,6 +64,13 @@
   height: 0px;
 }
 .todo--expanded-state {
-  position: absolute;
+  border-radius: 5px;
+  position: relative;
   z-index: 2;
+  width: 50%;
+    .todo__actions {
+      transition: opacity 218ms ease-out;
+      visibility: visible;
+      opacity: 1;
+    }
 }
