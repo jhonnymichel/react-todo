@@ -1,36 +1,25 @@
 import React from "react";
+import TodoAnimator from "../animation/TodoAnimator.js";
 
 export default class ToDo extends React.Component {
 
   constructor(props) {
     super(props);
-    this.modalEvent = new Event('modalEvent', {
-      bubbles: true,
-      cancelable: false }
-    );
-    console.log(this.modalEvent.bubbles);
-    this.transitionCss = "todo todo--initial-state";
     this.defaultCss = "todo";
     this.expandedCss = "todo todo--expanded-state";
     this.state = {
-      css: this.transitionCss,
+      css: this.defaultCss,
       details: [],
       expandCallback: this.expand.bind(this)
     };
   }
 
   expand() {
-    this.initialY = this.DOMElement.getBoundingClientRect().top +
-    this.DOMElement.getBoundingClientRect().height * 0.5;
-    this.finalY = 0;
-    this.DOMElement.dispatchEvent(this.modalEvent);
     let { details, expandCallback, css } = this.state;
-    let styles = {
-      transform: 'translateY(' + (this.finalY - this.initialY) + 'px)'
-    };
+    let styles = this.expandAnimator.expand();
     console.log("styles are ", styles, this.finalY, this.initialY);
     details = [
-      { title: 'created: ', value: '20/09/2016' }
+      // { title: 'created: ', value: '20/09/2016' }
     ];
     expandCallback = this.contract.bind(this);
     css = this.expandedCss;
@@ -40,7 +29,7 @@ export default class ToDo extends React.Component {
   }
 
   contract() {
-    this.DOMElement.dispatchEvent(this.modalEvent);
+    this.expandAnimator.contract();
     let { details, expandCallback, css } = this.state;
     details = [];
     expandCallback = this.expand.bind(this);
@@ -50,32 +39,17 @@ export default class ToDo extends React.Component {
     });
   }
 
-  fadeOut(e) {
+  setAsDone(e) {
     e.stopPropagation();
-    let css = { ...this.state.css };
-    css = this.transitionCss;
-    this.setState({
-      css
-    });
-    this.DOMElement.addEventListener('transitionend',
-                                      this.setAsDone.bind(this));
-  }
-
-  setAsDone() {
-    this.DOMElement.removeEventListener('transitionend',
-                                        this.setAsDone.bind(this));
+    if (this.expandAnimator.isExpanded) {
+      this.expandAnimator.contract();
+    }
     this.props.deleteToDo(this.props.objId);
   }
 
   componentDidMount() {
     this.DOMElement = this.refs.thisDOMElement;
-    setTimeout(() => {
-      let css = { ...this.state.css };
-      css = this.defaultCss;
-      this.setState({
-        css
-      });
-    }, 10);
+    this.expandAnimator = new TodoAnimator(this.DOMElement);
   }
 
   renderToDoDetails() {
@@ -89,7 +63,7 @@ export default class ToDo extends React.Component {
 
   renderButtons() {
     let action = this.state.expandCallback;
-    const deleteToDo = this.fadeOut.bind(this);
+    const deleteToDo = this.setAsDone.bind(this);
     return (
       <div className = "todo__actions">
         <button key="1" onClick={action} className="todo__actions__button">

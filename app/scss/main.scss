@@ -9,7 +9,7 @@ body {
     margin: 0;
 }
 .modal-background {
-  position: absolute;
+  position: fixed;
   z-index: 1;
   background: rgba(#000000, 0.68);
   width: 100%;

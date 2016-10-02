@@ -1,5 +1,6 @@
 import React from "react";
 import ToDo from "./ToDo";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 
 export default class ToDoList extends React.Component {
 
@@ -42,10 +43,19 @@ export default class ToDoList extends React.Component {
       value={todo.text}
       deleteToDo={this.deleteToDo.bind(this)}/>
     ).reverse();
+
     return (
       <div className="todo-list">
         {this.renderEmptyMessage(TodoList.length)}
-        {TodoList}
+        <ReactCSSTransitionGroup
+          style={{
+            width: '100%'
+          }}
+          transitionName="todo__animation"
+          transitionEnterTimeout={200}
+          transitionLeaveTimeout={200}>
+            {TodoList}
+        </ReactCSSTransitionGroup>
       </div>
     );
   }
