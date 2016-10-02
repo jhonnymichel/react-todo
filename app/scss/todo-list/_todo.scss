@@ -10,7 +10,7 @@
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  transition: opacity 0.2s ease-out, height 0.2s ease-out, padding 0.2s ease-out;
+  transition: opacity 0.2s ease-out, height 0.2s ease-out, padding 0.2s ease-out, transform 0.2s ease-out;
   width: 100%;
   padding: 20px 5px;
   overflow: hidden;
@@ -37,7 +37,7 @@
     visibility: hidden;
     display: flex;
     flex-wrap: nowrap;
-    transition: all 100ms ease-in;
+    transition: all 218ms ease-in;
     opacity: 0;
     .todo__actions__button {
       padding: 0px 10px;
@@ -46,20 +46,24 @@
       margin-left: 5px;
       .todo__actions__icon {
         font-size: 18px;
+        color: rgb(50, 50, 50);
       }
     }
   }
   &:hover {
     .todo__actions {
-      transition: opacity 100ms ease-out;
+      transition: opacity 218ms ease-out;
       visibility: visible;
       opacity: 1;
     }
   }
 }
 .todo--initial-state {
-  min-height: 0px;
   opacity: 0;
   padding: 0px;
   height: 0px;
+}
+.todo--expanded-state {
+  position: absolute;
+  z-index: 2;
 }

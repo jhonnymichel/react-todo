@@ -4,8 +4,14 @@ export default class ToDo extends React.Component {
 
   constructor(props) {
     super(props);
+    this.modalEvent = new Event('modalEvent', {
+      bubbles: true,
+      cancelable: false }
+    );
+    console.log(this.modalEvent.bubbles);
     this.transitionCss = "todo todo--initial-state";
     this.defaultCss = "todo";
+    this.expandedCss = "todo todo--expanded-state";
     this.state = {
       css: this.transitionCss,
       details: [],
@@ -14,26 +20,31 @@ export default class ToDo extends React.Component {
   }
 
   expand() {
-    let { details, expandCallback } = this.state;
+    this.DOMElement.dispatchEvent(this.modalEvent);
+    let { details, expandCallback, css } = this.state;
     details = [
       { title: 'created: ', value: '20/09/2016' }
     ];
     expandCallback = this.contract.bind(this);
+    css = this.expandedCss;
     this.setState({
-      details, expandCallback
+      details, expandCallback, css
     });
   }
 
   contract() {
-    let { details, expandCallback } = this.state;
+    this.DOMElement.dispatchEvent(this.modalEvent);
+    let { details, expandCallback, css } = this.state;
     details = [];
     expandCallback = this.expand.bind(this);
+    css = this.defaultCss;
     this.setState({
-      details, expandCallback
+      details, expandCallback, css
     });
   }
 
-  fadeOut() {
+  fadeOut(e) {
+    e.stopPropagation();
     let css = { ...this.state.css };
     css = this.transitionCss;
     this.setState({
@@ -62,7 +73,7 @@ export default class ToDo extends React.Component {
 
   renderToDoDetails() {
     return this.state.details.map((info, i) =>
-      <div>
+      <div key="i">
           <h5>{info.title}</h5>
           <p>{info.value}</p>
       </div>
@@ -74,13 +85,13 @@ export default class ToDo extends React.Component {
     const deleteToDo = this.fadeOut.bind(this);
     return (
       <div className = "todo__actions">
-        <button onClick={action} className="todo__actions__button">
+        <button key="1" onClick={action} className="todo__actions__button">
           <i className="todo__actions__icon fa fa-plus"></i>
         </button>
-        <button className="todo__actions__button">
+        <button key="2" className="todo__actions__button">
           <i className="todo__actions__icon fa fa-pencil"></i>
         </button>
-        <button onClick={deleteToDo} className="todo__actions__button">
+        <button key="3" onClick={deleteToDo} className="todo__actions__button">
           <i className="todo__actions__icon fa fa-trash-o"></i>
         </button>
       </div>
@@ -92,11 +103,11 @@ export default class ToDo extends React.Component {
     let { value } = this.props;
     let infos = this.renderToDoDetails();
     let buttons = this.renderButtons();
-    const clickCallback = this.fadeOut.bind(this);
+    const clickCallback = this.state.expandCallback;
 
     return (
       <div className = {css} ref="thisDOMElement"
-        onDoubleClick={clickCallback}>
+        onClick={clickCallback}>
         <h4 className = "todo__text">{value}</h4>
         {buttons}
         {infos}
