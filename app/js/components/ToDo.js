@@ -78,7 +78,7 @@ export default class ToDo extends React.Component {
           <i className="todo__actions__icon fa fa-plus"></i>
         </button>
         <button className="todo__actions__button">
-          <i className="todo__actions__icon fa fa-check"></i>
+          <i className="todo__actions__icon fa fa-pencil"></i>
         </button>
         <button onClick={deleteToDo} className="todo__actions__button">
           <i className="todo__actions__icon fa fa-trash-o"></i>
