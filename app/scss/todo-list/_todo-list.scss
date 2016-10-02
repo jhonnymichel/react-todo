@@ -1,0 +1,17 @@
+@import "todo";
+
+.todo-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  width: 50%;
+  margin: 0 auto;
+  min-height: 61px;
+  @extend %todo-default-style;
+  .todo-list__empty-message {
+      font-size: 1em;
+      color: #adadad;
+      margin: 0;
+      padding: 20px 5px;
+  }
+}

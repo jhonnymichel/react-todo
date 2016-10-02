@@ -4,8 +4,8 @@ export default class ToDo extends React.Component {
 
   constructor(props) {
     super(props);
-    this.transitionCss = "todo-list__todo todo-list__todo--initial-state";
-    this.defaultCss = "todo-list__todo";
+    this.transitionCss = "todo todo--initial-state";
+    this.defaultCss = "todo";
     this.state = {
       css: this.transitionCss,
       details: [],
@@ -73,15 +73,15 @@ export default class ToDo extends React.Component {
     let action = this.state.expandCallback;
     const deleteToDo = this.fadeOut.bind(this);
     return (
-      <div className = "todo-actions">
-        <button onClick={action} className="todo-actions__button">
-          <i className="todo-actions__icon fa fa-plus"></i>
+      <div className = "todo__actions">
+        <button onClick={action} className="todo__actions__button">
+          <i className="todo__actions__icon fa fa-plus"></i>
         </button>
-        <button className="todo-actions__button">
-          <i className="todo-actions__icon fa fa-check"></i>
+        <button className="todo__actions__button">
+          <i className="todo__actions__icon fa fa-check"></i>
         </button>
-        <button onClick={deleteToDo} className="todo-actions__button">
-          <i className="todo-actions__icon fa fa-trash-o"></i>
+        <button onClick={deleteToDo} className="todo__actions__button">
+          <i className="todo__actions__icon fa fa-trash-o"></i>
         </button>
       </div>
     );
@@ -97,7 +97,7 @@ export default class ToDo extends React.Component {
     return (
       <div className = {css} ref="thisDOMElement"
         onDoubleClick={clickCallback}>
-        <h4 className = "todo-list__todo--text">{value}</h4>
+        <h4 className = "todo__text">{value}</h4>
         {buttons}
         {infos}
       </div>
