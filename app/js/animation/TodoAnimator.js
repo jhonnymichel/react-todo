@@ -26,7 +26,7 @@ export default class TodoAnimator extends React.Component {
     return {
       transform: 'translateY(' + (this.finalY - this.initialY) + 'px)',
       top: (this.initialY -
-      this.DOMElement.getBoundingClientRect().height) + 'px'
+      this.DOMElement.getBoundingClientRect().height * .5) + 'px'
     };
   }
 

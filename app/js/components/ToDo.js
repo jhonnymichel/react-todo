@@ -1,5 +1,4 @@
 import React from "react";
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import TodoAnimator from "../animation/TodoAnimator.js";
 
 export default class ToDo extends React.Component {
@@ -99,12 +98,7 @@ export default class ToDo extends React.Component {
         onClick={clickCallback}>
         <h4 className = "todo__text">{value}</h4>
         {buttons}
-        <ReactCSSTransitionGroup style={{ width: "100%" }}
-          transitionName="todo__detail__animation"
-          transitionEnterTimeout={200}
-          transitionLeaveTimeout={200}>
-          {infos}
-        </ReactCSSTransitionGroup>
+        {infos}
       </div>
     );
   }
