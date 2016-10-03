@@ -106,14 +106,24 @@ export default class ToDo extends React.Component {
       if (this.expandAnimator.isExpanded) {
         return (
           <TextAreaAutoSize
+            className="todo__textarea"
+            onClick={e => e.stopPropagation()}
             ref="editTodoInput"
             defaultValue={value}
             onChange={this.updateTodoValue.bind(this)}/>
         );
       }
     }
+
+    let multiLineText = value.split("\n").map(item =>
+    <span>
+      {item}
+      <br/>
+    </span>
+  );
+
     return (
-      <h4 className = "todo__text">{value}</h4>
+      <h4 className = "todo__text">{multiLineText}</h4>
     );
   }
 

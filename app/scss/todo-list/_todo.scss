@@ -4,7 +4,13 @@
   border-radius: 0px 0px 5px 5px;
   border-top: 1px solid rgb(167, 167, 167);
 }
-
+%todo-text {
+  margin: 0;
+  padding: 0;
+  color: #737373;
+  font-size: 16px;
+  font-family: inherit;
+}
 .todo {
   display: flex;
   flex-wrap: nowrap;
@@ -21,11 +27,7 @@
     //width: 75%;
     flex-grow: 2;
     overflow: hidden;
-    margin: 0;
-    padding: 0;
-    font-size: 1em;
-    color: #737373;
-    font-size: 16px;
+    @extend %todo-text;
   }
   &:first-child {
     border-top: none;
@@ -81,6 +83,25 @@
       margin-left: 10px;
       color: white;
       font-size: 11px;
+    }
+  }
+
+  %clear-textarea {
+    background: none;
+    border: none;
+    outline: none;
+  }
+
+  .todo__textarea {
+    width: 100%;
+    @extend %clear-textarea;
+    @extend %todo-text;
+    font-weight: bold;
+    &:hover {
+      @extend %clear-textarea;
+    }
+    &:focus {
+      @extend %clear-textarea;
     }
   }
 }
