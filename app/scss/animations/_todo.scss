@@ -1,20 +1,24 @@
 .todo__animation-enter{
+  will-change: height;
   opacity: 0;
   padding: 0px;
   height: 0px;
 }
 .todo__animation-enter-active {
+  will-change: height;
   transition: all .2s ease-out;
   padding: 20px 5px;
   height: auto;
   opacity: 1;
 }
 .todo__animation-leave {
+  will-change: height;
   padding: 20px 5px;
   overflow: hidden;
   height: auto;
 }
 .todo__animation-leave-active{
+  will-change: height;
   transition: all .2s ease-out;
   opacity: 0;
   padding: 0px;
@@ -24,6 +28,7 @@
 
 
 .todo--expanded-state {
+  will-change: transform;
   transition: transform 218ms ease-out;
   border-radius: 5px;
   position: fixed;
