@@ -1,5 +1,6 @@
 import React from "react";
 import TodoAnimator from "../animation/TodoAnimator.js";
+import TextAreaAutoSize from "react-autosize-textarea";
 
 export default class ToDo extends React.Component {
 
@@ -64,7 +65,7 @@ export default class ToDo extends React.Component {
   componentDidUpdate() {
     if (this.expandAnimator) {
       if (this.expandAnimator.isExpanded) {
-        this.refs.editTodoInput.focus();
+        this.refs.editTodoInput.getTextareaDOMNode().focus();
       }
     }
   }
@@ -104,11 +105,10 @@ export default class ToDo extends React.Component {
     if (this.expandAnimator) {
       if (this.expandAnimator.isExpanded) {
         return (
-          <input
+          <TextAreaAutoSize
             ref="editTodoInput"
             defaultValue={value}
-            onChange={this.updateTodoValue.bind(this)}>
-          </input>
+            onChange={this.updateTodoValue.bind(this)}/>
         );
       }
     }
