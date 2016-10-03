@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./Header";
 import AddBar from "./AddBar";
 import ToDoList from "./ToDoList";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 
 export default class Layout extends React.Component {
   constructor() {
@@ -17,7 +18,8 @@ export default class Layout extends React.Component {
     this.refs.todoList.receiveNewTodo(todo);
   }
 
-  onModalStateChanged() {
+  onModalStateChanged(e) {
+    this.closeModalCallback = e.detail.closeCallback;
     this.setState({
       modalBackground: !this.state.modalBackground
     });
@@ -26,7 +28,9 @@ export default class Layout extends React.Component {
   renderModalBackground() {
     if (this.state.modalBackground) {
       return (
-        <div className="modal-background">
+        <div
+          onClick = {this.closeModalCallback}
+          className="modal-background">
         </div>
       );
     }
@@ -49,7 +53,12 @@ export default class Layout extends React.Component {
           <AddBar callBack={callBack}/>
         </div>
         <ToDoList ref="todoList" />
-        {modalBackground}
+        <ReactCSSTransitionGroup
+        transitionName="modal-bg__animation"
+        transitionEnterTimeout={200}
+        transitionLeaveTimeout={200}>
+          {modalBackground}
+        </ReactCSSTransitionGroup>
       </div>
     );
   }

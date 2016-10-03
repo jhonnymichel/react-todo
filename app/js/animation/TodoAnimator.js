@@ -2,14 +2,17 @@ import React from 'react';
 
 export default class TodoAnimator extends React.Component {
 
-  constructor(DOMElement) {
+  constructor(DOMElement, closeCallback) {
     super();
     this.DOMElement = DOMElement;
     this.isExpanded = false;
-    this.modalEvent = new Event('modalEvent', {
+    this.modalEvent = new CustomEvent('modalEvent', {
       bubbles: true,
-      cancelable: false }
-    );
+      cancelable: false,
+      detail: {
+        closeCallback: closeCallback
+      }
+    });
   }
 
   setBounds() {

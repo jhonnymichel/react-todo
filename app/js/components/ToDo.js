@@ -56,7 +56,9 @@ export default class ToDo extends React.Component {
 
   componentDidMount() {
     this.DOMElement = this.refs.thisDOMElement;
-    this.expandAnimator = new TodoAnimator(this.DOMElement);
+    this.expandAnimator = new TodoAnimator(
+      this.DOMElement,
+      this.contract.bind(this));
   }
 
   renderToDoDetails() {
