@@ -61,6 +61,14 @@ export default class ToDo extends React.Component {
       this.contract.bind(this));
   }
 
+  componentDidUpdate() {
+    if (this.expandAnimator) {
+      if (this.expandAnimator.isExpanded) {
+        this.refs.editTodoInput.focus();
+      }
+    }
+  }
+
   renderToDoDetails() {
     return this.state.details.map((info, i) =>
       <div className = "todo__detail" key="i">
@@ -89,7 +97,6 @@ export default class ToDo extends React.Component {
   }
 
   updateTodoValue(e) {
-    console.log('funfed');
     this.props.updateTodoValue(this.props.objId, e.target.value);
   }
 
@@ -98,6 +105,7 @@ export default class ToDo extends React.Component {
       if (this.expandAnimator.isExpanded) {
         return (
           <input
+            ref="editTodoInput"
             defaultValue={value}
             onChange={this.updateTodoValue.bind(this)}>
           </input>
