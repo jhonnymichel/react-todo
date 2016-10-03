@@ -21,6 +21,14 @@ export default class ToDoList extends React.Component {
     this.setState({ todoList });
   }
 
+  updateTodoValue(key, value) {
+    let todoList = this.state.todoList;
+    todoList.find(todo => todo.id === key).text = value;
+    this.setState({
+      todoList
+    });
+  }
+
   deleteToDo(key) {
     let todoList = this.state.todoList.filter(todo => todo.id !== key);
     this.setState({ todoList });
@@ -41,6 +49,7 @@ export default class ToDoList extends React.Component {
       <ToDo key={todo.id}
       objId={todo.id}
       value={todo.text}
+      updateTodoValue={this.updateTodoValue.bind(this)}
       deleteToDo={this.deleteToDo.bind(this)}/>
     ).reverse();
 

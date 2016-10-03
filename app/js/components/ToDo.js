@@ -88,17 +88,39 @@ export default class ToDo extends React.Component {
     );
   }
 
+  updateTodoValue(e) {
+    console.log('funfed');
+    this.props.updateTodoValue(this.props.objId, e.target.value);
+  }
+
+  renderTodoText(value) {
+    if (this.expandAnimator) {
+      if (this.expandAnimator.isExpanded) {
+        return (
+          <input
+            defaultValue={value}
+            onChange={this.updateTodoValue.bind(this)}>
+          </input>
+        );
+      }
+    }
+    return (
+      <h4 className = "todo__text">{value}</h4>
+    );
+  }
+
   render() {
     let { css, styles } = this.state;
     let { value } = this.props;
     let infos = this.renderToDoDetails();
     let buttons = this.renderButtons();
+    let todoText = this.renderTodoText(value);
     const clickCallback = this.state.expandCallback;
 
     return (
       <div className = {css} style={styles} ref="thisDOMElement"
         onClick={clickCallback}>
-        <h4 className = "todo__text">{value}</h4>
+        {todoText}
         {buttons}
         {infos}
       </div>
