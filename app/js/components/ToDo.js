@@ -1,4 +1,5 @@
 import React from "react";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import TodoAnimator from "../animation/TodoAnimator.js";
 
 export default class ToDo extends React.Component {
@@ -17,14 +18,19 @@ export default class ToDo extends React.Component {
   expand() {
     let { details, expandCallback, css } = this.state;
     let styles = this.expandAnimator.expand();
-    console.log("styles are ", styles, this.finalY, this.initialY);
+
     details = [
-      // { title: 'created: ', value: '20/09/2016' }
+      { title: 'created: ', value: '20/09/2016' }
     ];
+
     expandCallback = this.contract.bind(this);
     css = this.expandedCss;
+
     this.setState({
-      details, expandCallback, css, styles
+      details,
+      expandCallback,
+      css,
+      styles
     });
   }
 
@@ -34,6 +40,7 @@ export default class ToDo extends React.Component {
     details = [];
     expandCallback = this.expand.bind(this);
     css = this.defaultCss;
+
     this.setState({
       details, expandCallback, css, styles: {}
     });
@@ -55,9 +62,9 @@ export default class ToDo extends React.Component {
 
   renderToDoDetails() {
     return this.state.details.map((info, i) =>
-      <div key="i">
-          <h5>{info.title}</h5>
-          <p>{info.value}</p>
+      <div className = "todo__detail" key="i">
+          <h5 className = "todo__detail__title">{info.title}</h5>
+          <p className = "todo__detail__text">{info.value}</p>
       </div>
     );
   }
@@ -92,7 +99,12 @@ export default class ToDo extends React.Component {
         onClick={clickCallback}>
         <h4 className = "todo__text">{value}</h4>
         {buttons}
-        {infos}
+        <ReactCSSTransitionGroup style={{ width: "100%" }}
+          transitionName="todo__detail__animation"
+          transitionEnterTimeout={200}
+          transitionLeaveTimeout={200}>
+          {infos}
+        </ReactCSSTransitionGroup>
       </div>
     );
   }
