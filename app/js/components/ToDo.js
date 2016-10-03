@@ -43,6 +43,7 @@ export default class ToDo extends React.Component {
     e.stopPropagation();
     if (this.expandAnimator.isExpanded) {
       this.expandAnimator.contract();
+      this.contract();
     }
     this.props.deleteToDo(this.props.objId);
   }
