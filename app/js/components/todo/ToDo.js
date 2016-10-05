@@ -1,6 +1,7 @@
 import React from "react";
 import TodoAnimator from "./animation/TodoAnimator.js";
 import TodoText from "./TodoText.js";
+import TodoActionButtons from "./TodoActionButtons.js";
 
 export default class ToDo extends React.Component {
 
@@ -47,7 +48,7 @@ export default class ToDo extends React.Component {
     });
   }
 
-  setAsDone(e) {
+  deleteToDo(e) {
     e.stopPropagation();
     if (this.expandAnimator.isExpanded) {
       this.expandAnimator.contract();
@@ -78,44 +79,29 @@ export default class ToDo extends React.Component {
             false);
   }
 
-  renderButtons() {
-    let action = this.state.expandCallback;
-    const deleteToDo = this.setAsDone.bind(this);
-    return (
-      <div className = "todo__actions">
-        <button key="1" onClick={action} className="todo__actions__button">
-          <i className="todo__actions__icon fa fa-plus"></i>
-        </button>
-        <button key="2" className="todo__actions__button">
-          <i className="todo__actions__icon fa fa-pencil"></i>
-        </button>
-        <button key="3" onClick={deleteToDo} className="todo__actions__button">
-          <i className="todo__actions__icon fa fa-trash-o"></i>
-        </button>
-      </div>
-    );
-  }
-
   render() {
     let state = { ...this.state };
-    let { css, styles, todoId } = state;
-    let { value } = this.props;
+    let { css, styles } = state;
+    let { value, todoId } = this.props;
     let infos = this.renderToDoDetails();
-    let buttons = this.renderButtons();
+    let deteleTodo = this.deleteToDo.bind(this);
     let isEditMode = this.getTextMode();
     const onUpdateTodoValue = this.props.updateTodoValue;
     const clickCallback = this.state.expandCallback;
 
     return (
-      <div className = {css} style={styles} ref="thisDOMElement"
+      <div
+        className = {css}
+        style={styles}
+        ref="thisDOMElement"
         onClick={clickCallback}>
         <TodoText
           isEditMode={isEditMode}
           todoId={todoId}
-          onUpdateTodoValue={onUpdateTodoValue}
-          value={value}
-        />
-        {buttons}
+          updateTodoValue={onUpdateTodoValue}
+          value={value}/>
+      <TodoActionButtons
+        deleteTodo={deteleTodo}/>
         {infos}
       </div>
     );
