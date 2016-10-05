@@ -1,5 +1,5 @@
 import React from "react";
-import ToDo from "./ToDo";
+import ToDo from "./todo/ToDo";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 
 export default class ToDoList extends React.Component {
@@ -47,7 +47,7 @@ export default class ToDoList extends React.Component {
   render() {
     let TodoList = this.state.todoList.map((todo, i) =>
       <ToDo key={todo.id}
-      objId={todo.id}
+      todoId={todo.id}
       value={todo.text}
       updateTodoValue={this.updateTodoValue.bind(this)}
       deleteToDo={this.deleteToDo.bind(this)}/>
