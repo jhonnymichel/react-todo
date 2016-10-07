@@ -1,17 +1,11 @@
-import React from 'react';
+export default class TodoAnimator {
 
-export default class TodoAnimator extends React.Component {
-
-  constructor(DOMElement, closeCallback) {
-    super();
+  constructor(DOMElement) {
     this.DOMElement = DOMElement;
     this.isExpanded = false;
     this.modalEvent = new CustomEvent('modalEvent', {
       bubbles: true,
-      cancelable: false,
-      detail: {
-        closeCallback: closeCallback
-      }
+      cancelable: false
     });
   }
 

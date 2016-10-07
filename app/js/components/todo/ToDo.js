@@ -56,8 +56,8 @@ export default class ToDo extends React.Component {
     this.DOMElement = this.refs.thisDOMElement;
 
     this.expandAnimator = new TodoAnimator(
-      this.DOMElement,
-      this.contract.bind(this));
+      this.DOMElement
+    );
   }
 
   getTextMode() {
