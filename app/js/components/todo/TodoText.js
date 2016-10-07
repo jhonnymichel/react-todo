@@ -21,22 +21,28 @@ export default class TodoText extends React.Component {
     if (isEditMode) {
       return (
         <TextAreaAutoSize
+          ref="editTodoInput"
           className="todo__textarea"
-          onClick={e => e.stopPropagation()}
+          onClick={
+            e => e.stopPropagation()
+          }
           ref="editTodoInput"
           defaultValue={value}
           onChange={onChange}/>
       );
     }
-    let multiLineText = value.split("\n").map(item =>
-      <span>
+    let multiLineText = value.split("\n");
+    multiLineText = multiLineText.map((item, i) =>
+      <span key={i}>
         {item}
         <br/>
       </span>
     );
 
     return (
-      <h4 className = "todo__text">{multiLineText}</h4>
+      <h4 className = "todo__text">
+        {multiLineText}
+      </h4>
     );
   }
 }

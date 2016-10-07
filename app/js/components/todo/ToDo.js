@@ -54,6 +54,7 @@ export default class ToDo extends React.Component {
       this.expandAnimator.contract();
       this.contract();
     }
+    console.log('oi');
     this.props.deleteToDo(this.props.todoId);
   }
 
@@ -82,12 +83,10 @@ export default class ToDo extends React.Component {
   render() {
     let state = { ...this.state };
     let { css, styles } = state;
-    let { value, todoId } = this.props;
     let infos = this.renderToDoDetails();
-    let deteleTodo = this.deleteToDo.bind(this);
+    let deleteTodo = this.deleteToDo.bind(this);
     let isEditMode = this.getTextMode();
-    const onUpdateTodoValue = this.props.updateTodoValue;
-    const clickCallback = this.state.expandCallback;
+    const clickCallback = state.expandCallback;
 
     return (
       <div
@@ -97,11 +96,11 @@ export default class ToDo extends React.Component {
         onClick={clickCallback}>
         <TodoText
           isEditMode={isEditMode}
-          todoId={todoId}
-          updateTodoValue={onUpdateTodoValue}
-          value={value}/>
+          todoId={this.props.todoId}
+          updateTodoValue={this.props.updateTodoValue}
+          value={this.props.value}/>
       <TodoActionButtons
-        deleteTodo={deteleTodo}/>
+        deleteTodo={deleteTodo}/>
         {infos}
       </div>
     );
