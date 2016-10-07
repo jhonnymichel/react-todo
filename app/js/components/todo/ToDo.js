@@ -2,6 +2,7 @@ import React from "react";
 import TodoAnimator from "./animation/TodoAnimator.js";
 import TodoText from "./TodoText.js";
 import TodoActionButtons from "./TodoActionButtons.js";
+import TodoDetails from "./TodoDetails.js";
 
 export default class ToDo extends React.Component {
 
@@ -17,61 +18,46 @@ export default class ToDo extends React.Component {
   }
 
   expand() {
-    let { details, expandCallback, css } = this.state;
-    let styles = this.expandAnimator.expand();
+    let state = { ...this.state };
 
-    details = [
+    state.styles = this.expandAnimator.expand();
+    state.details = [
       { title: 'created: ', value: '20/09/2016' }
     ];
+    state.expandCallback = this.contract.bind(this);
+    state.css = this.expandedCss;
 
-    expandCallback = this.contract.bind(this);
-    css = this.expandedCss;
-
-    this.setState({
-      details,
-      expandCallback,
-      css,
-      styles
-    });
+    this.setState(state);
   }
 
   contract() {
     this.expandAnimator.contract();
     let state = { ...this.state };
-    let { details, expandCallback, css } = state;
-    details = [];
-    expandCallback = this.expand.bind(this);
-    css = this.defaultCss;
 
-    this.setState({
-      details, expandCallback, css, styles: {}
-    });
+    state.details = [];
+    state.expandCallback = this.expand.bind(this);
+    state.css = this.defaultCss;
+
+    this.setState(state);
   }
 
   deleteToDo(e) {
     e.stopPropagation();
+
     if (this.expandAnimator.isExpanded) {
       this.expandAnimator.contract();
       this.contract();
     }
-    console.log('oi');
+
     this.props.deleteToDo(this.props.todoId);
   }
 
   componentDidMount() {
     this.DOMElement = this.refs.thisDOMElement;
+
     this.expandAnimator = new TodoAnimator(
       this.DOMElement,
       this.contract.bind(this));
-  }
-
-  renderToDoDetails() {
-    return this.state.details.map((info, i) =>
-      <div className = "todo__detail" key={i}>
-          <h5 className = "todo__detail__title">{info.title}</h5>
-          <p className = "todo__detail__text">{info.value}</p>
-      </div>
-    );
   }
 
   getTextMode() {
@@ -82,8 +68,7 @@ export default class ToDo extends React.Component {
 
   render() {
     let state = { ...this.state };
-    let { css, styles } = state;
-    let infos = this.renderToDoDetails();
+    let { css, styles, details } = state;
     let deleteTodo = this.deleteToDo.bind(this);
     let isEditMode = this.getTextMode();
     const clickCallback = state.expandCallback;
@@ -99,11 +84,11 @@ export default class ToDo extends React.Component {
           todoId={this.props.todoId}
           updateTodoValue={this.props.updateTodoValue}
           value={this.props.value}/>
-      <TodoActionButtons
-        deleteTodo={deleteTodo}/>
-        {infos}
+        <TodoActionButtons
+          deleteTodo={deleteTodo}/>
+        <TodoDetails
+          details={details}/>
       </div>
     );
   }
-
 }
