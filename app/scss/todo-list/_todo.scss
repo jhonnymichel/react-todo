@@ -96,6 +96,7 @@
     width: 100%;
     @extend %clear-textarea;
     @extend %todo-text;
+    resize: none;
     font-weight: bold;
     &:hover {
       @extend %clear-textarea;

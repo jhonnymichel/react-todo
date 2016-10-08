@@ -16,9 +16,8 @@ export default class TodoText extends React.Component {
   }
 
   render() {
-    const { value, isEditMode } = this.props;
     const onChange = this.onChange.bind(this);
-    if (isEditMode) {
+    if (this.props.isEditMode) {
       return (
         <TextAreaAutoSize
           ref="editTodoInput"
@@ -27,11 +26,11 @@ export default class TodoText extends React.Component {
             e => e.stopPropagation()
           }
           ref="editTodoInput"
-          defaultValue={value}
+          defaultValue={this.props.value}
           onChange={onChange}/>
       );
     }
-    let multiLineText = value.split("\n");
+    let multiLineText = this.props.value.split("\n");
     multiLineText = multiLineText.map((item, i) =>
       <span key={i}>
         {item}

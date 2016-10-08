@@ -16,7 +16,6 @@ export default class TodoAnimator {
     this.bounds = this.DOMElement.getBoundingClientRect();
     this.initialY = this.bounds.top + this.bounds.height * 0.5;
     this.finalY = window.innerHeight * 0.5;
-    console.log("bounds are", this.bounds, this.initialY);
   }
 
   expand() {
@@ -24,9 +23,8 @@ export default class TodoAnimator {
     this.DOMElement.dispatchEvent(this.modalEvent);
     this.isExpanded = true;
     return {
-      transform: 'translateY(' + (this.finalY - this.initialY) + 'px)',
-      top: (this.initialY -
-      this.DOMElement.getBoundingClientRect().height * .5) + 'px'
+      transform: `translateY(${this.finalY - this.initialY}px)`,
+      top: `${this.initialY - this.bounds.height * .5}px`
     };
   }
 

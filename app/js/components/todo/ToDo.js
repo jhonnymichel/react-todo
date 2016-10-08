@@ -69,18 +69,16 @@ export default class ToDo extends React.Component {
   }
 
   render() {
-    let state = { ...this.state };
-    let { css, styles, details } = state;
-    let deleteTodo = this.deleteToDo.bind(this);
+    const state = { ...this.state };
+    const deleteTodo = this.deleteToDo.bind(this);
     let isEditMode = this.getTextMode();
-    const clickCallback = state.expandCallback;
 
     return (
       <div
-        className = {css}
-        style={styles}
+        className = {state.css}
+        style={state.styles}
         ref="thisDOMElement"
-        onClick={clickCallback}>
+        onClick={state.expandCallback}>
         <TodoText
           isEditMode={isEditMode}
           todoId={this.props.todoId}
@@ -89,7 +87,7 @@ export default class ToDo extends React.Component {
         <TodoActionButtons
           deleteTodo={deleteTodo}/>
         <TodoDetails
-          details={details}/>
+          details={state.details}/>
       </div>
     );
   }
