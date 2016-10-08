@@ -1,11 +1,14 @@
 export default class TodoAnimator {
 
-  constructor(DOMElement) {
+  constructor(DOMElement, closeCallback) {
     this.DOMElement = DOMElement;
     this.isExpanded = false;
     this.modalEvent = new CustomEvent('modalEvent', {
       bubbles: true,
-      cancelable: false
+      cancelable: false,
+      detail: {
+        closeCallback
+      }
     });
   }
 

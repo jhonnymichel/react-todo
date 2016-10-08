@@ -37,6 +37,7 @@ export default class ToDo extends React.Component {
     state.details = [];
     state.expandCallback = this.expand.bind(this);
     state.css = this.defaultCss;
+    state.styles = {};
 
     this.setState(state);
   }
@@ -56,7 +57,8 @@ export default class ToDo extends React.Component {
     this.DOMElement = this.refs.thisDOMElement;
 
     this.expandAnimator = new TodoAnimator(
-      this.DOMElement
+      this.DOMElement,
+      this.contract.bind(this)
     );
   }
 
