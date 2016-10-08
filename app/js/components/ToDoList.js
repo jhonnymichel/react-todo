@@ -22,15 +22,20 @@ export default class ToDoList extends React.Component {
   }
 
   updateTodoValue(key, value) {
-    let todoList = this.state.todoList;
-    todoList.find(todo => todo.id === key).text = value;
+    let todoList = [...this.state.todoList];
+    let todoToUpdate = todoList.find(
+      todo => todo.id === key
+    );
+    todoToUpdate.text = value;
     this.setState({
       todoList
     });
   }
 
   deleteToDo(key) {
-    let todoList = this.state.todoList.filter(todo => todo.id !== key);
+    let todoList = this.state.todoList.filter(
+      todo => todo.id !== key
+    );
     this.setState({ todoList });
   }
 
@@ -38,7 +43,7 @@ export default class ToDoList extends React.Component {
     if (todoAmount === 0) {
       return (
         <h4 className="todo-list__empty-message">
-          Are you sure you don't have nothing to do?
+          Are you sure you don't have anything to do?
         </h4>
       );
     }
