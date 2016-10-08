@@ -37,19 +37,24 @@ export default class Layout extends React.Component {
   }
 
   componentDidMount() {
-    this.refs.mainNode.addEventListener("modalEvent",
-                                        this.onModalStateChanged.bind(this));
+    this.refs.mainNode.addEventListener(
+      "modalEvent",
+      this.onModalStateChanged.bind(this)
+    );
   }
 
   render() {
-    let { title, description } = this.state;
+    const state = { ...this.state };
     const callBack = this.receiveNewTodo.bind(this);
     let modalBackground = this.renderModalBackground();
 
     return (
       <div ref="mainNode">
         <div className="header-wrapper">
-          <Header title={title} description={description}/>
+          <Header
+            title={state.title}
+            description={state.description}
+          />
           <AddBar callBack={callBack}/>
         </div>
         <ToDoList ref="todoList" />

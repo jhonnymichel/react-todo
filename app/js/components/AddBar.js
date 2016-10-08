@@ -1,30 +1,40 @@
 import React from "react";
 
 export default class AddBar extends React.Component {
+
   constructor(props) {
     super(props);
-    this.state = { inputValue: "" };
+    this.state = {
+      inputValue: ""
+    };
   }
+
   onInputChangeHandler(e) {
-    const inputValue = e.target.value;
-    this.setState({ inputValue });
+    let inputValue = e.target.value;
+    this.setState({
+      inputValue
+    });
   }
+
   onAddTodoClickHandler(e) {
     e.preventDefault();
-    const todo = this.state.inputValue;
+    let todo = this.state.inputValue;
 
     if (todo === "") {
       alert("conteúdo não pode estar vazio");
     } else {
       this.props.callBack(todo);
-      this.setState({ inputValue: "" });
+      this.setState({
+        inputValue: ""
+      });
     }
   }
+
   render() {
     const onChangeHandler = this.onInputChangeHandler.bind(this);
     const onClickHandler = this.onAddTodoClickHandler.bind(this);
+    const ph = "What todo?";
     let value = this.state.inputValue;
-    let ph = "What todo?";
 
     return (
       <form className="add-bar" onSubmit={onClickHandler}>
