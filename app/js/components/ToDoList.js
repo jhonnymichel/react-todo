@@ -16,9 +16,21 @@ export default class ToDoList extends React.Component {
     let todoList = [...this.state.todoList];
     todoList.push({
       text: todo,
-      id: this.idIncrementer++
+      id: this.idIncrementer++,
+      isComplete: false
     });
     this.setState({ todoList });
+  }
+
+  updateTodoStatus(key) {
+    let todoList = [...this.state.todoList];
+    let todoToUpdate = todoList.find(
+      todo => todo.id === key
+    );
+    todoToUpdate.isComplete = !todoToUpdate.isComplete;
+    this.setState({
+      todoList
+    });
   }
 
   updateTodoValue(key, value) {
@@ -54,6 +66,8 @@ export default class ToDoList extends React.Component {
       <ToDo key={todo.id}
       todoId={todo.id}
       value={todo.text}
+      isComplete={todo.isComplete}
+      updateTodoStatus={this.updateTodoStatus.bind(this)}
       updateTodoValue={this.updateTodoValue.bind(this)}
       deleteToDo={this.deleteToDo.bind(this)}/>
     ).reverse();

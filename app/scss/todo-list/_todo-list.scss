@@ -7,6 +7,7 @@
   width: 50%;
   margin: 0 auto;
   min-height: 61px;
+  margin-bottom: 50px;
   @extend %todo-default-style;
   .todo-list__empty-message {
       font-size: 1em;

@@ -3,6 +3,7 @@ import TodoAnimator from "./animation/TodoAnimator.js";
 import TodoText from "./TodoText.js";
 import TodoActionButtons from "./TodoActionButtons.js";
 import TodoDetails from "./TodoDetails.js";
+import DoneToggle from "./DoneToggle.js";
 
 export default class ToDo extends React.Component {
 
@@ -42,6 +43,11 @@ export default class ToDo extends React.Component {
     this.setState(state);
   }
 
+  updateStatus(e) {
+    e.stopPropagation();
+    this.props.updateTodoStatus(this.props.todoId);
+  }
+
   deleteToDo(e) {
     e.stopPropagation();
 
@@ -71,6 +77,7 @@ export default class ToDo extends React.Component {
   render() {
     const state = { ...this.state };
     const deleteTodo = this.deleteToDo.bind(this);
+    const updateStatus = this.updateStatus.bind(this);
     let isEditMode = this.getTextMode();
 
     return (
@@ -79,6 +86,9 @@ export default class ToDo extends React.Component {
         style={state.styles}
         ref="thisDOMElement"
         onClick={state.expandCallback}>
+        <DoneToggle
+          status={this.props.isComplete}
+          clickHandler={updateStatus}/>
         <TodoText
           isEditMode={isEditMode}
           todoId={this.props.todoId}

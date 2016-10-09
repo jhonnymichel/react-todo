@@ -22,6 +22,26 @@
   overflow: hidden;
   width: 100%;
   height: auto;
+  .todo__toggle-button {
+      width: 50px;
+      padding: 0px 10px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      outline: none;
+      .fa {
+        transition: opacity 100ms ease-out;
+        opacity: 0.4;
+      }
+      .fa-check-square-o {
+        margin-left: 3px;
+        opacity: 1;
+      }
+
+  }
   @extend %todo-default-style;
   .todo__text {
     //width: 75%;
