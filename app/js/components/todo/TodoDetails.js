@@ -8,7 +8,7 @@ export default function TodoDetails({ details }) {
     </div>
   );
   return (
-    <div>
+    <div className="todo__details">
       {list}
     </div>
   );

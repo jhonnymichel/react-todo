@@ -23,7 +23,8 @@ export default class ToDo extends React.Component {
 
     state.styles = this.expandAnimator.expand();
     state.details = [
-      { title: 'created: ', value: '20/09/2016' }
+      { title: 'created: ', value: '20/09/2016' },
+      { value: 'Press ENTER to finish, SHIFT + ENTER to break line' }
     ];
     state.expandCallback = this.contract.bind(this);
     state.isExpanded = true;

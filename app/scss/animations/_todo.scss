@@ -7,13 +7,13 @@
 .todo__animation-enter-active {
   will-change: height;
   transition: all .2s ease-out;
-  padding: 20px 5px;
+  padding: 18px 5px;
   height: auto;
   opacity: 1;
 }
 .todo__animation-leave {
   will-change: height;
-  padding: 20px 5px;
+  padding: 18px 5px;
   overflow: hidden;
   height: auto;
 }
