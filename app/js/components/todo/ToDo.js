@@ -12,7 +12,7 @@ export default class ToDo extends React.Component {
     this.defaultCss = "todo";
     this.expandedCss = "todo todo--expanded-state";
     this.state = {
-      css: this.defaultCss,
+      isExpanded: false,
       details: [],
       expandCallback: this.expand.bind(this)
     };
@@ -26,7 +26,7 @@ export default class ToDo extends React.Component {
       { title: 'created: ', value: '20/09/2016' }
     ];
     state.expandCallback = this.contract.bind(this);
-    state.css = this.expandedCss;
+    state.isExpanded = true;
 
     this.setState(state);
   }
@@ -37,7 +37,7 @@ export default class ToDo extends React.Component {
 
     state.details = [];
     state.expandCallback = this.expand.bind(this);
-    state.css = this.defaultCss;
+    state.isExpanded = false;
     state.styles = {};
 
     this.setState(state);
@@ -51,7 +51,7 @@ export default class ToDo extends React.Component {
   deleteToDo(e) {
     e.stopPropagation();
 
-    if (this.expandAnimator.isExpanded) {
+    if (this.state.isExpanded) {
       this.expandAnimator.contract();
       this.contract();
     }
@@ -68,21 +68,17 @@ export default class ToDo extends React.Component {
     );
   }
 
-  getTextMode() {
-    return (this.expandAnimator ?
-            this.expandAnimator.isExpanded :
-            false);
-  }
-
   render() {
     const state = { ...this.state };
     const deleteTodo = this.deleteToDo.bind(this);
     const updateStatus = this.updateStatus.bind(this);
-    let isEditMode = this.getTextMode();
+    let css = state.isExpanded ?
+      this.expandedCss :
+      this.defaultCss;
 
     return (
       <div
-        className = {state.css}
+        className = {css}
         style={state.styles}
         ref="thisDOMElement"
         onClick={state.expandCallback}>
@@ -90,7 +86,7 @@ export default class ToDo extends React.Component {
           status={this.props.isComplete}
           clickHandler={updateStatus}/>
         <TodoText
-          isEditMode={isEditMode}
+          isEditMode={state.isExpanded}
           todoId={this.props.todoId}
           updateTodoValue={this.props.updateTodoValue}
           value={this.props.value}/>
