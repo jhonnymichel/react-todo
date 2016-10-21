@@ -29,6 +29,7 @@ export default class Layout extends React.Component {
     if (this.state.modalBackground) {
       return (
         <div
+          ref="modalBackground"
           onClick = {this.closeModalCallback}
           className="modal-background">
         </div>

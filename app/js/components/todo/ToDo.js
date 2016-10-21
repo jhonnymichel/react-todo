@@ -35,7 +35,6 @@ export default class ToDo extends React.Component {
   contract() {
     this.expandAnimator.contract();
     let state = { ...this.state };
-
     state.details = [];
     state.expandCallback = this.expand.bind(this);
     state.isExpanded = false;

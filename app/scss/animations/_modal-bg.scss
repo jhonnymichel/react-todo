@@ -8,8 +8,10 @@
 }
 .modal-bg__animation-leave {
   opacity: 1;
+  pointer-events: none;
 }
 .modal-bg__animation-leave-active{
   transition: all 200ms ease-out;
+  pointer-events: none;
   opacity: 0;
 }
