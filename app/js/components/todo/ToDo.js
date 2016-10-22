@@ -11,6 +11,7 @@ export default class ToDo extends React.Component {
     super(props);
     this.defaultCss = "todo";
     this.expandedCss = "todo todo--expanded-state";
+    this.creationTimeStamp = this.getTimeStamp(this.props.dateOfCreation);
     this.state = {
       isExpanded: false,
       details: [],
@@ -23,8 +24,13 @@ export default class ToDo extends React.Component {
 
     state.styles = this.expandAnimator.expand();
     state.details = [
-      { title: 'created: ', value: '20/09/2016' },
-      { value: 'Press ENTER to finish, SHIFT + ENTER to break line' }
+      {
+        title: "Created: ", 
+        value: this.creationTimeStamp
+      },
+      {
+        value: 'Press ENTER to finish, SHIFT + ENTER to break line'
+      }
     ];
     state.expandCallback = this.contract.bind(this);
     state.isExpanded = true;
@@ -42,6 +48,19 @@ export default class ToDo extends React.Component {
 
     this.setState(state);
   }
+
+  getTimeStamp(time) {
+    const date = new Date(time);
+    const hours = ("0" + date.getHours()).slice(-2);
+    const minutes = ("0" + date.getMinutes()).slice(-2);
+    const day = ("0" + date.getDate()).slice(-2);
+    const month = ("0" + (date.getMonth() + 1)).slice(-2);
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}, ${hours}:${minutes}`;
+  }
+
+  format
 
   updateStatus(e) {
     e.stopPropagation();
