@@ -1,2 +1,2 @@
 require("../scss/main.scss");
-require("../lib/fontawesome-sass/stylesheets/_font-awesome.scss");
+require("../lib/google-material-iconfont/material-icons.scss");

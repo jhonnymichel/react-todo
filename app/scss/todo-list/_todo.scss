@@ -33,12 +33,11 @@
       align-items: center;
       justify-content: center;
       outline: none;
-      .fa {
+      .material-icons, .material-icons.unchecked {
         transition: opacity 100ms ease-out;
         opacity: 0.4;
       }
-      .fa-check-square-o {
-        margin-left: 3px;
+      .material-icons.checked {
         opacity: 1;
       }
 
@@ -67,8 +66,8 @@
       background: none;
       border: none;
       margin-left: 5px;
-      .todo__actions__icon {
-        font-size: 18px;
+      .material-icons{
+        font-size: 22px;
         color: rgb(50, 50, 50);
       }
     }
