@@ -25,6 +25,7 @@ export default class TodoText extends React.Component {
           onClick={
             e => e.stopPropagation()
           }
+          onKeyPress={this.props.handleLineBreak}
           ref="editTodoInput"
           defaultValue={this.props.value}
           onChange={onChange}/>

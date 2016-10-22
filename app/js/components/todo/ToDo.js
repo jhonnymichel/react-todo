@@ -70,6 +70,12 @@ export default class ToDo extends React.Component {
     this.props.deleteToDo(this.props.todoId);
   }
 
+  handleLineBreak(e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      this.contract();
+    }
+  }
+
   componentDidMount() {
     this.DOMElement = this.refs.thisDOMElement;
 
@@ -83,6 +89,7 @@ export default class ToDo extends React.Component {
     const state = { ...this.state };
     const deleteTodo = this.deleteToDo.bind(this);
     const updateStatus = this.updateStatus.bind(this);
+    const handleLineBreak = this.handleLineBreak.bind(this);
     let css = state.isExpanded ?
       this.expandedCss :
       this.defaultCss;
@@ -100,7 +107,9 @@ export default class ToDo extends React.Component {
           isEditMode={state.isExpanded}
           todoId={this.props.todoId}
           updateTodoValue={this.props.updateTodoValue}
-          value={this.props.value}/>
+          value={this.props.value}
+          handleLineBreak={handleLineBreak}
+        />
         <TodoActionButtons
           deleteTodo={deleteTodo}/>
         <TodoDetails
