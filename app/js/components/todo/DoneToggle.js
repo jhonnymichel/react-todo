@@ -1,13 +1,14 @@
 import React from "react";
 
 export default function DoneToggle ({ status, clickHandler }) {
-  let icon = `material-icons ${status ? 'checked' : 'unchecked'}`;
+  let css = `material-icons ${status ? 'checked' : 'unchecked'}`;
+  let icon = `${status ? 'check_circle' : 'radio_button_unchecked'}`;
   return (
     <button
       className="todo__toggle-button"
       onClick={clickHandler}
     >
-      <i className = {icon}>check_circle</i>
+      <i className = {css}>{icon}</i>
     </button>
   );
 }
