@@ -62,8 +62,21 @@ export default class ToDoList extends React.Component {
     }
   }
 
-  render() {
-    let TodoList = this.state.todoList.map((todo, i) =>
+  renderTodos(list, conditions) {
+    list = list.filter(listItem => {
+      const conditionKeys = Object.keys(conditions);
+      if (conditionKeys.length <= 1) {
+        return conditions[conditionKeys[0]] === listItem[conditionKeys[0]];
+      }
+      return conditionKeys.reduce((result, condition) => {
+        if (result === false) {
+          return false;
+        }
+        return listItem[condition] === conditions[condition];
+      });
+    });
+
+    return list.map((todo, i) =>
       <ToDo
         key={todo.id}
         todoId={todo.id}
@@ -74,8 +87,19 @@ export default class ToDoList extends React.Component {
         updateTodoValue={this.updateTodoValue.bind(this)}
         deleteToDo={this.deleteToDo.bind(this)}
       />
-    ).reverse();
+    );
+  }
 
+  render() {
+    const pendentTodoList = this.renderTodos(
+      [...this.state.todoList],
+      { isComplete: false }
+    ).reverse();
+    const completedTodoList = this.renderTodos(
+      [...this.state.todoList],
+      { isComplete: true }
+    );
+    const TodoList = pendentTodoList.concat(completedTodoList);
     return (
       <div className="todo-list">
         {this.renderEmptyMessage(TodoList.length)}
@@ -86,7 +110,7 @@ export default class ToDoList extends React.Component {
           transitionName="todo__animation"
           transitionEnterTimeout={200}
           transitionLeaveTimeout={200}>
-            {TodoList}
+          {TodoList}
         </ReactCSSTransitionGroup>
       </div>
     );
