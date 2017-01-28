@@ -10,7 +10,7 @@ export default class TodoText extends React.Component {
 
   componentDidUpdate() {
     if (this.props.isEditMode) {
-      const textArea = this.refs.editTodoInput.getTextareaDOMNode();
+      const textArea = this.refs.editTodoInput.textarea;
       textArea.focus();
     }
   }

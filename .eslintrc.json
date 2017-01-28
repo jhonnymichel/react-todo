@@ -1,0 +1,23 @@
+{
+  "extends": "google",
+  "plugins": ["react"],
+  "env":{
+    "browser": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "no-trailing-spaces": "error",
+    "react/jsx-uses-vars": [2],
+    "linebreak-style": "off",
+    "object-curly-spacing": [1, "always"],
+    "arrow-parens": "off",
+    "require-jsdoc": "off"
+  }
+}
