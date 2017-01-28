@@ -105,6 +105,7 @@ export default class ToDo extends React.Component {
           status={this.props.isComplete}
           clickHandler={updateStatus}/>
         <TodoText
+          isComplete={this.props.isComplete}
           isEditMode={state.isExpanded}
           todoId={this.props.todoId}
           updateTodoValue={this.props.updateTodoValue}

@@ -53,6 +53,11 @@
     overflow: hidden;
     @extend %todo-text;
   }
+  .todo__text.complete {
+    //width: 75%;
+    text-decoration: line-through;
+    color: rgba(#737373, 0.7);
+  }
   &:first-child {
     border-top: none;
   }

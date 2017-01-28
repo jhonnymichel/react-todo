@@ -17,6 +17,10 @@ export default class TodoText extends React.Component {
 
   render() {
     const onChange = this.onChange.bind(this);
+    let isComplete = "";
+    if (this.props.isComplete) {
+      isComplete = "complete"
+    }
     if (this.props.isEditMode) {
       return (
         <TextAreaAutoSize
@@ -40,7 +44,7 @@ export default class TodoText extends React.Component {
     );
 
     return (
-      <h4 className = "todo__text">
+      <h4 className = {`todo__text ${isComplete}`}>
         {multiLineText}
       </h4>
     );
