@@ -1,0 +1,29 @@
+%btn-list__btn {
+  list-style: none;
+  button {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    .material-icons {
+      font-size: inherit;
+    }
+  }
+}
+
+.order-bar {
+  width: 50%;
+  min-width: 320px;
+  position: absolute;
+  .order-bar__btn-list {
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    .btn-list__btn {
+      @extend %btn-list__btn;
+      &--selected {
+        @extend %btn-list__btn;
+      }
+    }
+  }
+}

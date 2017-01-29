@@ -8,7 +8,7 @@ import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 export default class Layout extends React.Component {
   constructor() {
     super();
-    this.orderByOptions = ['date', 'ToDo', 'Completed'];
+    this.orderByOptions = ['date', 'undone', 'done'];
     this.state = {
       title: "Xexeu's todo",
       description: "Add a todo and try to accomplish 'em!'",

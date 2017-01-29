@@ -42,7 +42,7 @@ export default class AddBar extends React.Component {
           placeholder={ ph } onChange={ onChangeHandler } value={ value }>
         </input>
         <button className="add-bar__send-button">
-          Add ToDo
+          <i className="material-icons">done</i>
         </button>
       </form>
     );
