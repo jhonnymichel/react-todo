@@ -4,10 +4,14 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  width: 50%;
+  width: 100%;  
   margin: 0 auto;
   min-height: 61px;
   margin-bottom: 50px;
+  @media (min-width: 360px) {
+    width: 50%;    
+    min-width: 320px;
+  }
   @extend %todo-default-style;
   .todo-list__empty-message {
       font-size: 1em;

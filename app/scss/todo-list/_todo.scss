@@ -1,8 +1,10 @@
 %todo-default-style {
   box-sizing: border-box;
   background-color: rgb(255, 255, 255);
-  border-radius: 0px 0px 5px 5px;
   border-top: 1px solid rgb(167, 167, 167);
+  @media (min-width: 360px) {
+    border-radius: 0px 0px 5px 5px;
+  }
 }
 %todo-text {
   margin: 0;
@@ -63,7 +65,9 @@
     border-top: none;
   }
   &:last-child {
-    border-radius: 0px 0px 5px 5px;
+    @media (min-width: 360px) {
+      border-radius: 0px 0px 5px 5px;
+    }
   }
   .todo__actions {
     visibility: hidden;
@@ -93,12 +97,17 @@
   .todo__details {
       width: 100%;
       display: flex;
-      justify-content: space-between;
-      flex-wrap: nowrap;
+      flex-direction: column;
       position: absolute;
+      align-items: flex-start;
       bottom: 0px;
       left: 0px;
       transform: translateY(110%);
+      @media (min-width: 768px) {
+        flex-direction: row;        
+        justify-content: space-between;
+        flex-wrap: nowrap;
+      }
   }
   .todo__detail {
     display: flex;
@@ -110,6 +119,7 @@
     .todo__detail__title {
       padding: 0px;
       margin: 0px;
+      margin-right: 10px;
       color: white;
       font-size: 11px;
       text-transform: uppercase;
@@ -117,7 +127,6 @@
     .todo__detail__text {
       padding: 0px;
       margin: 0px;
-      margin-left: 10px;
       color: white;
       font-size: 11px;
     }
