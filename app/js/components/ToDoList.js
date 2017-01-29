@@ -77,29 +77,38 @@ export default class ToDoList extends React.Component {
     );
   }
 
-  renderTodos(list, conditions) {
-    if (!conditions) {
-      return this.mapToDom(list);
-    }
-    list = list.filter(listItem => {
-      const conditionKeys = Object.keys(conditions);
-      if (conditionKeys.length <= 1) {
-        return conditions[conditionKeys[0]] === listItem[conditionKeys[0]];
+  getSortFormula(orderBy) {
+    const properties = {
+      date: 'dateOfCreation',
+      done: 'isComplete',
+      undone: 'isComplete'
+    };
+    return (todoA, todoB) => {
+      const criteria = properties[orderBy];
+      let todoACriteria = todoA[criteria];
+      let todobCriteria = todoB[criteria];
+      if (orderBy === 'undone') {
+        todoACriteria = !todoACriteria;
+        todobCriteria = !todobCriteria;
       }
-      return conditionKeys.reduce((result, condition) => {
-        if (result === false) {
-          return false;
-        }
-        return listItem[condition] === conditions[condition];
-      });
-    });
+      if (todoACriteria > todobCriteria) {
+        return 1;
+      } else if (todoACriteria < todobCriteria) {
+        return -1;
+      }
+      return 0;
+    };
+  }
 
+  renderTodos(list, orderBy = 'date') {
+    list = list.sort(this.getSortFormula(orderBy));
     return this.mapToDom(list);
   }
 
   render() {
     const TodoList = this.renderTodos(
-      [...this.state.todoList]
+      [...this.state.todoList],
+      this.props.orderBy
     ).reverse();
     return (
       <div className="todo-list">

@@ -1,11 +1,15 @@
 %btn-list__btn {
   list-style: none;
+  border-radius: 5px;
   button {
+    padding: 5px;
+    cursor: pointer;
     display: flex;
     align-items: center;
     background: none;
-    border: none;
+    border: 0px;    
     .material-icons {
+      pointer-events: none;
       font-size: inherit;
     }
   }
@@ -23,6 +27,7 @@
       @extend %btn-list__btn;
       &--selected {
         @extend %btn-list__btn;
+        background-color: white;
       }
     }
   }

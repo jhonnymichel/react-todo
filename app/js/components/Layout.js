@@ -22,6 +22,7 @@ export default class Layout extends React.Component {
   }
 
   orderBy(e) {
+    console.log(e.target);
     const state = { ...this.state };
     state.orderBy = e.target.value;
     this.setState(state);
@@ -73,7 +74,10 @@ export default class Layout extends React.Component {
           />
           <AddBar callBack={callBack}/>
         </div>
-        <ToDoList ref="todoList" />
+        <ToDoList 
+          ref="todoList" 
+          orderBy={state.orderBy}
+        />
         <ReactCSSTransitionGroup
         transitionName="modal-bg__animation"
         transitionEnterTimeout={200}

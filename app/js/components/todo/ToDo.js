@@ -82,9 +82,6 @@ export default class ToDo extends React.Component {
   }
 
   handleLineBreak(e) {
-    if (isMobile()) {
-      return;
-    }
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       this.contract();
