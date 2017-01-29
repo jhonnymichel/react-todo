@@ -2,20 +2,29 @@ import React from "react";
 import Header from "./Header";
 import AddBar from "./AddBar";
 import ToDoList from "./ToDoList";
+import OrderByList from "./OrderByList";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 
 export default class Layout extends React.Component {
   constructor() {
     super();
+    this.orderByOptions = ['date', 'ToDo', 'Completed'];
     this.state = {
       title: "Xexeu's todo",
       description: "Add a todo and try to accomplish 'em!'",
-      modalBackground: false
+      modalBackground: false,
+      orderBy: 'date'
     };
   }
 
   receiveNewTodo(todo) {
     this.refs.todoList.receiveNewTodo(todo);
+  }
+
+  orderBy(e) {
+    const state = { ...this.state };
+    state.orderBy = e.target.value;
+    this.setState(state);
   }
 
   onModalStateChanged(e) {
@@ -47,6 +56,7 @@ export default class Layout extends React.Component {
   render() {
     const state = { ...this.state };
     const callBack = this.receiveNewTodo.bind(this);
+    const orderCallback = this.orderBy.bind(this);
     let modalBackground = this.renderModalBackground();
 
     return (
@@ -55,6 +65,11 @@ export default class Layout extends React.Component {
           <Header
             title={state.title}
             description={state.description}
+          />
+          <OrderByList
+            options={this.orderByOptions}
+            selected={state.orderBy}
+            changeCallback={orderCallback}
           />
           <AddBar callBack={callBack}/>
         </div>
