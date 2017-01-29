@@ -1,3 +1,5 @@
+import isMobile from "../../../utils/checkMobile";
+
 export default class TodoAnimator {
 
   constructor(DOMElement, closeCallback) {
@@ -15,11 +17,7 @@ export default class TodoAnimator {
   setBounds() {
     this.bounds = this.DOMElement.getBoundingClientRect();
     this.initialY = this.bounds.top + this.bounds.height * 0.5;
-    this.finalY = window.innerHeight * (this.isMobile() ? 0.2 : 0.5);
-  }
-
-  isMobile() {
-    return window.innerWidth <= 768;
+    this.finalY = window.innerHeight * (isMobile() ? 0.2 : 0.5);
   }
 
   expand() {

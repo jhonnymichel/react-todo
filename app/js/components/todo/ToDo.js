@@ -4,6 +4,7 @@ import TodoText from "./TodoText.js";
 import TodoActionButtons from "./TodoActionButtons.js";
 import TodoDetails from "./TodoDetails.js";
 import DoneToggle from "./DoneToggle.js";
+import isMobile from "../../utils/checkMobile";
 
 export default class ToDo extends React.Component {
 
@@ -19,6 +20,16 @@ export default class ToDo extends React.Component {
     };
   }
 
+  getLineBreakMessage() {
+    const mobile = 'Press out of the todo card to dismiss';
+    const desktop = 'Press ENTER to finish, SHIFT + ENTER to break line';
+
+    if (isMobile()) {
+      return mobile;
+    }
+    return desktop;
+  }
+
   expand() {
     let state = { ...this.state };
 
@@ -29,7 +40,7 @@ export default class ToDo extends React.Component {
         value: this.creationTimeStamp
       },
       {
-        value: 'Press ENTER to finish, SHIFT + ENTER to break line'
+        value: this.getLineBreakMessage()
       }
     ];
     state.expandCallback = this.contract.bind(this);
@@ -71,6 +82,9 @@ export default class ToDo extends React.Component {
   }
 
   handleLineBreak(e) {
+    if (isMobile()) {
+      return;
+    }
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       this.contract();
