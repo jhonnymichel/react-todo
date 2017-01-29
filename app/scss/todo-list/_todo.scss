@@ -49,6 +49,7 @@
   @extend %todo-default-style;
   .todo__text {
     //width: 75%;
+    transition: color 200ms ease-out;
     flex-grow: 2;
     overflow: hidden;
     @extend %todo-text;

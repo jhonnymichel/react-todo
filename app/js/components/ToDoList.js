@@ -62,20 +62,7 @@ export default class ToDoList extends React.Component {
     }
   }
 
-  renderTodos(list, conditions) {
-    list = list.filter(listItem => {
-      const conditionKeys = Object.keys(conditions);
-      if (conditionKeys.length <= 1) {
-        return conditions[conditionKeys[0]] === listItem[conditionKeys[0]];
-      }
-      return conditionKeys.reduce((result, condition) => {
-        if (result === false) {
-          return false;
-        }
-        return listItem[condition] === conditions[condition];
-      });
-    });
-
+  mapToDom(list) {
     return list.map((todo, i) =>
       <ToDo
         key={todo.id}
@@ -90,16 +77,30 @@ export default class ToDoList extends React.Component {
     );
   }
 
+  renderTodos(list, conditions) {
+    if (!conditions) {
+      return this.mapToDom(list);
+    }
+    list = list.filter(listItem => {
+      const conditionKeys = Object.keys(conditions);
+      if (conditionKeys.length <= 1) {
+        return conditions[conditionKeys[0]] === listItem[conditionKeys[0]];
+      }
+      return conditionKeys.reduce((result, condition) => {
+        if (result === false) {
+          return false;
+        }
+        return listItem[condition] === conditions[condition];
+      });
+    });
+
+    return this.mapToDom(list);
+  }
+
   render() {
-    const pendentTodoList = this.renderTodos(
-      [...this.state.todoList],
-      { isComplete: false }
+    const TodoList = this.renderTodos(
+      [...this.state.todoList]
     ).reverse();
-    const completedTodoList = this.renderTodos(
-      [...this.state.todoList],
-      { isComplete: true }
-    );
-    const TodoList = pendentTodoList.concat(completedTodoList);
     return (
       <div className="todo-list">
         {this.renderEmptyMessage(TodoList.length)}
