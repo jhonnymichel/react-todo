@@ -5,7 +5,7 @@ export default function OrderByList({options, selected, changeCallback}) {
     date: 'date_range',
     undone: 'check_box_outline_blank',
     done: 'check_box'
-  }
+  };
   const buttons = options.map(option => {
     let className = "btn-list__btn";
     if (option === selected) {

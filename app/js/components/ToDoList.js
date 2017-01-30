@@ -1,6 +1,7 @@
 import React from "react";
 import ToDo from "./todo/ToDo";
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import FlipMove from "react-flip-move";
+
 
 export default class ToDoList extends React.Component {
 
@@ -113,15 +114,9 @@ export default class ToDoList extends React.Component {
     return (
       <div className="todo-list">
         {this.renderEmptyMessage(TodoList.length)}
-        <ReactCSSTransitionGroup
-          style={{
-            width: '100%'
-          }}
-          transitionName="todo__animation"
-          transitionEnterTimeout={200}
-          transitionLeaveTimeout={200}>
+        <FlipMove style={{width: "100%"}}>
           {TodoList}
-        </ReactCSSTransitionGroup>
+        </FlipMove>
       </div>
     );
   }
