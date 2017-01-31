@@ -65,6 +65,7 @@ export default class ToDoList extends React.Component {
   mapToDom(list) {
     return list.map((todo, i) =>
       <ToDo
+        ref={todo.id}
         key={todo.id}
         todoId={todo.id}
         value={todo.text}
@@ -75,6 +76,43 @@ export default class ToDoList extends React.Component {
         deleteToDo={this.deleteToDo.bind(this)}
       />
     );
+  }
+
+  componentWillReceiveProps(props) {
+    if (props.orderBy) {
+      this.willTransform = true;
+      this.listItems = {};
+      for (let ref in this.refs) {
+        const domElement = this.refs[ref].refs.thisDOMElement;
+        if (domElement) {
+          this.listItems[ref] = {
+            position: domElement.getBoundingClientRect().top,
+            element: domElement
+          };
+        }
+      }
+    }
+  }
+
+  componentDidUpdate() {
+    if (!this.willTransform) {
+      return;
+    }
+    for (let item in this.listItems) {
+      if (this.listItems[item]) {
+        const listItem = this.listItems[item];
+        const currentPosition = listItem
+          .element
+          .getBoundingClientRect().top;
+        listItem.element.style.transitionDuration = "0ms";
+        listItem.element.style.transform = `translateY(${listItem.position - currentPosition}px)`;
+        requestAnimationFrame(function() {          
+          listItem.element.style.transitionDuration = "300ms";
+          listItem.element.style.transform = "";
+        });
+      }
+    }
+    this.willTransform = false;
   }
 
   getSortFormula(orderBy) {
