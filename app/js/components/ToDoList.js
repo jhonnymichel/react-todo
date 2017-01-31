@@ -79,7 +79,7 @@ export default class ToDoList extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    if (props.orderBy) {
+    if (props.orderBy && props.orderBy !== this.props.orderBy) {
       this.willTransform = true;
       this.listItems = {};
       for (let ref in this.refs) {

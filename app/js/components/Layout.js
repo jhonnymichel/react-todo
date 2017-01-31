@@ -22,7 +22,6 @@ export default class Layout extends React.Component {
   }
 
   orderBy(e) {
-    console.log(e.target);
     const state = { ...this.state };
     state.orderBy = e.target.value;
     this.setState(state);
