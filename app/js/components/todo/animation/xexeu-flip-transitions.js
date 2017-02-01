@@ -1,14 +1,64 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 
 export default class XexeuFlip extends React.Component {
+
+  // timingFunction
+  // transitionDuration
+  // initialAndFinalStyle
+  // transformOrigin
+
+  // reorderTimingFunction
+  // reorderTransitionDuration
+  // reorderIncreasingDelay
+
+  // enterTimingFunction
+  // enterTransitionDuration
+  // enterInitialStyle
+  // enterTransformOrigin
+
   constructor() {
     super();
     this.willTransform = false;
     this.amountOfChildren = 0;
     this.clonedElements = null;
     this.newChildKey = "";
+  }
+
+  componentWillReceiveProps(props) {
+    this.reorderTimingFunction =
+      props.reorderTimingFunction ||
+      props.timingFunction ||
+      'ease-in-out';
+
+    this.reorderTransitionDuration =
+      props.reorderTransitionDuration ||
+      props.transitionDuration ||
+      200;
+
+    this.reorderIncreasingDelay =
+      props.reorderIncreasingDelay ||
+      0;
+
+    this.enterTimingFunction =
+      props.enterTimingFunction ||
+      props.timingFunction ||
+      'ease-in-out';
+
+    this.enterTransitionDuration =
+      props.enterTransitionDuration ||
+      props.transitionDuration ||
+      200;
+
+    this.enterTransformOrigin =
+      props.enterTransformOrigin ||
+      props.transformOrigin ||
+      'center center';
+
+    this.enterInitialStyle =
+      props.enterInitialStyle ||
+      props.initialAndFinalStyle ||
+      { transform: "scale(0)" };
   }
 
   componentWillUpdate() {
@@ -39,36 +89,61 @@ export default class XexeuFlip extends React.Component {
     for (let i = 0; i < length; i++) {
       const listItem = this.listItems[i];
       const rect = listItem.element.getBoundingClientRect();
-      listItem.element.style.transitionDuration = "0ms";
+      if (this.shouldChildAnimate(rect, listItem)) {
+        this.applySwapAnimation(rect, listItem);
+      }
+    }
+    if (this.newChildKey) {
+      this.applyEnterAnimation();
+    }
+    this.willTransform = false;
+  }
+
+  shouldChildAnimate(rect, listItem) {
+    console.log(rect);
+    console.log(listItem);
+    return rect.top !== listItem.positionY || rect.left !== listItem.positionX;
+  }
+
+  applySwapAnimation(rect, listItem) {
+    listItem.element.style.transitionDuration = "0ms";
       listItem.element.style.transitionDelay = "0ms";
       listItem.element
         .style
         .transform = `translate(${listItem.positionX - rect.left}px, ${listItem.positionY - rect.top}px)`;
-      requestAnimationFrame(() => {
-        listItem.element
-          .style
-          .transitionTimingFunction = `${this.props.reorderTimingFunction || 'ease-in-out'}`;
-        listItem.element
-          .style
-          .transitionDuration = `${this.props.reorderTransitionDuration || 200}ms`;
-        listItem.element
-          .style
-          .transitionDelay = `${this.props.reorderIncreasingDelay * i || 0}ms`;
-        listItem.element.style.transform = "";
-      });
-    }
-    if (this.newChildKey) {
-      const newChild = ReactDOM.findDOMNode(this.refs[this.newChildKey]);
-      newChild.style.transform = `scaleY(0)`;
-      newChild.style.transformOrigin = `center top`;
       requestAnimationFrame(() => {        
-        newChild.style.transform = "";
-        newChild.style.transitionTimingFunction = `${this.props.reorderTimingFunction || 'ease-in-out'}`;
-        newChild.style.transitionDuration = `${this.props.reorderTransitionDuration || 200}ms`;
-      });
-      this.newChildKey = "";
-    }
-    this.willTransform = false;
+        listItem.element
+          .style
+          .transitionProperty = 'all';
+        listItem.element
+          .style
+          .transitionTimingFunction = `${this.reorderTimingFunction}`;
+        listItem.element
+          .style
+          .transitionDuration = `${this.reorderTransitionDuration}ms`;
+        listItem.element
+          .style
+          .transitionDelay = `${this.reorderIncreasingDelay}ms`;
+        listItem.element.style.transform = "";
+      }
+    );
+  }
+
+  applyEnterAnimation() {
+    const newChild = ReactDOM.findDOMNode(this.refs[this.newChildKey]);
+    for (let property in this.enterInitialStyle) {
+      newChild.style[property] = this.enterInitialStyle[property];
+    };
+    newChild.style.transformOrigin = this.enterTransformOrigin;
+    requestAnimationFrame(() => { 
+      for (let property in this.enterInitialStyle) {
+        newChild.style[property] = "";
+      };
+      newChild.style.transitionProperty = 'all';
+      newChild.style.transitionTimingFunction = this.enterTimingFunction;
+      newChild.style.transitionDuration = `${this.enterTransitionDuration}ms`;
+    });
+    this.newChildKey = "";
   }
 
   cloneChildrenWithRefs(children) {
