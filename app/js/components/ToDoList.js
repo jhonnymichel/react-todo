@@ -114,6 +114,7 @@ export default class ToDoList extends React.Component {
       <div className="todo-list">
         {this.renderEmptyMessage(TodoList.length)}
         <XexeuFlip
+          style={ {width: "100%"} }
           enterInitialStyle={ {transform: "scaleY(0)"} }
           reorderTransitionDuration={300}
           reorderIncreasingDuration={30}

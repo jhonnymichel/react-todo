@@ -3,20 +3,6 @@ import ReactDOM from 'react-dom';
 
 export default class XexeuFlip extends React.Component {
 
-  // timingFunction
-  // transitionDuration
-  // initialAndFinalStyle
-  // transformOrigin
-
-  // reorderTimingFunction
-  // reorderTransitionDuration
-  // reorderIncreasingDelay
-
-  // enterTimingFunction
-  // enterTransitionDuration
-  // enterInitialStyle
-  // enterTransformOrigin
-
   constructor() {
     super();
     this.willTransform = false;
@@ -71,6 +57,7 @@ export default class XexeuFlip extends React.Component {
       const key = child.key;
       const domElement = ReactDOM.findDOMNode(this.refs[key]);
       const rect = domElement.getBoundingClientRect();
+      console.log(rect);
       if (domElement) {
         this.listItems.push({
           positionY: rect.top,
@@ -100,33 +87,30 @@ export default class XexeuFlip extends React.Component {
   }
 
   shouldChildAnimate(rect, listItem) {
-    console.log(rect);
-    console.log(listItem);
     return rect.top !== listItem.positionY || rect.left !== listItem.positionX;
   }
 
   applySwapAnimation(rect, listItem) {
     listItem.element.style.transitionDuration = "0ms";
-      listItem.element.style.transitionDelay = "0ms";
+    listItem.element.style.transitionDelay = "0ms";
+    listItem.element
+      .style
+      .transform = `translate(${listItem.positionX - rect.left}px, ${listItem.positionY - rect.top}px)`;
+    requestAnimationFrame(() => {
       listItem.element
         .style
-        .transform = `translate(${listItem.positionX - rect.left}px, ${listItem.positionY - rect.top}px)`;
-      requestAnimationFrame(() => {        
-        listItem.element
-          .style
-          .transitionProperty = 'all';
-        listItem.element
-          .style
-          .transitionTimingFunction = `${this.reorderTimingFunction}`;
-        listItem.element
-          .style
-          .transitionDuration = `${this.reorderTransitionDuration}ms`;
-        listItem.element
-          .style
-          .transitionDelay = `${this.reorderIncreasingDelay}ms`;
-        listItem.element.style.transform = "";
-      }
-    );
+        .transitionProperty = 'all';
+      listItem.element
+        .style
+        .transitionTimingFunction = `${this.reorderTimingFunction}`;
+      listItem.element
+        .style
+        .transitionDuration = `${this.reorderTransitionDuration}ms`;
+      listItem.element
+        .style
+        .transitionDelay = `${this.reorderIncreasingDelay}ms`;
+      listItem.element.style.transform = "";
+    });
   }
 
   applyEnterAnimation() {
@@ -160,7 +144,7 @@ export default class XexeuFlip extends React.Component {
   render() {
     return (
       <div
-        style={{width: "100%"}}
+        style={this.props.style}
       >
         {this.cloneChildrenWithRefs(this.props.children)}
       </div>
