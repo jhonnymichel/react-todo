@@ -13,6 +13,7 @@ export default class XexeuFlip extends React.Component {
       return;
     }
     this.willTransform = true;
+    this.listItems = [];
     React.Children.forEach(this.props.children, (child) => {
       const key = child.key;
       const domElement = ReactDOM.findDOMNode(this.refs[key]);

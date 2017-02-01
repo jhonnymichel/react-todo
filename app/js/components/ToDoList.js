@@ -67,7 +67,7 @@ export default class ToDoList extends React.Component {
       <ToDo
         key={todo.id}
         todoId={todo.id}
-        value={`${i}`}
+        value={todo.text}
         isComplete={todo.isComplete}
         dateOfCreation={todo.dateOfCreation}
         updateTodoStatus={this.updateTodoStatus.bind(this)}
