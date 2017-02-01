@@ -57,7 +57,6 @@ export default class XexeuFlip extends React.Component {
       const key = child.key;
       const domElement = ReactDOM.findDOMNode(this.refs[key]);
       const rect = domElement.getBoundingClientRect();
-      console.log(rect);
       if (domElement) {
         this.listItems.push({
           positionY: rect.top,
