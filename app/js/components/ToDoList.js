@@ -1,6 +1,6 @@
 import React from "react";
 import ToDo from "./todo/ToDo";
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import XexeuFlip from "./todo/animation/xexeu-flip-transitions";
 
 export default class ToDoList extends React.Component {
 
@@ -65,10 +65,9 @@ export default class ToDoList extends React.Component {
   mapToDom(list) {
     return list.map((todo, i) =>
       <ToDo
-        ref={todo.id}
         key={todo.id}
         todoId={todo.id}
-        value={todo.text}
+        value={`${i}`}
         isComplete={todo.isComplete}
         dateOfCreation={todo.dateOfCreation}
         updateTodoStatus={this.updateTodoStatus.bind(this)}
@@ -76,44 +75,6 @@ export default class ToDoList extends React.Component {
         deleteToDo={this.deleteToDo.bind(this)}
       />
     );
-  }
-
-  componentWillUpdate() {
-    if (this.willTransform) {
-      return;
-    }
-    this.willTransform = true;
-    this.listItems = {};
-    for (let ref in this.refs) {
-      const domElement = this.refs[ref].refs.thisDOMElement;
-      if (domElement) {
-        this.listItems[ref] = {
-          position: domElement.getBoundingClientRect().top,
-          element: domElement
-        };
-      }
-    }
-  }
-
-  componentDidUpdate() {
-    if (!this.willTransform) {
-      return;
-    }
-    for (let item in this.listItems) {
-      if (this.listItems[item]) {
-        const listItem = this.listItems[item];
-        const currentPosition = listItem
-          .element
-          .getBoundingClientRect().top;
-        listItem.element.style.transitionDuration = "0ms";
-        listItem.element.style.transform = `translateY(${listItem.position - currentPosition}px)`;
-        requestAnimationFrame(function() {          
-          listItem.element.style.transitionDuration = "300ms";
-          listItem.element.style.transform = "";
-        });
-      }
-    }
-    this.willTransform = false;
   }
 
   getSortFormula(orderBy) {
@@ -152,17 +113,16 @@ export default class ToDoList extends React.Component {
     return (
       <div className="todo-list">
         {this.renderEmptyMessage(TodoList.length)}
-        <ReactCSSTransitionGroup
-          style={{
-            width: '100%'
-          }}
-          transitionName="todo__animation"
+        <XexeuFlip
+          reactTransitionName="todo__animation"
           transitionEnterTimeout={200}
-          transitionLeaveTimeout={200}>
+          transitionLeaveTimeout={200}
+          reorderTransitionDuration={300}
+          reorderIncreasingDuration={30}
+        >
           {TodoList}
-        </ReactCSSTransitionGroup>
+        </XexeuFlip>
       </div>
     );
   }
-
 }
