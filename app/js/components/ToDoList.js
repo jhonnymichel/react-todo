@@ -78,18 +78,19 @@ export default class ToDoList extends React.Component {
     );
   }
 
-  componentWillReceiveProps(props) {
-    if (props.orderBy && props.orderBy !== this.props.orderBy) {
-      this.willTransform = true;
-      this.listItems = {};
-      for (let ref in this.refs) {
-        const domElement = this.refs[ref].refs.thisDOMElement;
-        if (domElement) {
-          this.listItems[ref] = {
-            position: domElement.getBoundingClientRect().top,
-            element: domElement
-          };
-        }
+  componentWillUpdate() {
+    if (this.willTransform) {
+      return;
+    }
+    this.willTransform = true;
+    this.listItems = {};
+    for (let ref in this.refs) {
+      const domElement = this.refs[ref].refs.thisDOMElement;
+      if (domElement) {
+        this.listItems[ref] = {
+          position: domElement.getBoundingClientRect().top,
+          element: domElement
+        };
       }
     }
   }
