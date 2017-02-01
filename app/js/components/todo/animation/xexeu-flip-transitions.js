@@ -6,6 +6,9 @@ export default class XexeuFlip extends React.Component {
   constructor() {
     super();
     this.willTransform = false;
+    this.amountOfChildren = 0;
+    this.clonedElements = null;
+    this.newChildKey = "";
   }
 
   componentWillUpdate() {
@@ -54,11 +57,25 @@ export default class XexeuFlip extends React.Component {
         listItem.element.style.transform = "";
       });
     }
+    if (this.newChildKey) {
+      const newChild = ReactDOM.findDOMNode(this.refs[this.newChildKey]);
+      newChild.style.transform = `scaleY(0)`;
+      newChild.style.transformOrigin = `center top`;
+      requestAnimationFrame(() => {        
+        newChild.style.transform = "";
+        newChild.style.transitionTimingFunction = `${this.props.reorderTimingFunction || 'ease-in-out'}`;
+        newChild.style.transitionDuration = `${this.props.reorderTransitionDuration || 200}ms`;
+      });
+      this.newChildKey = "";
+    }
     this.willTransform = false;
   }
 
   cloneChildrenWithRefs(children) {
     return React.Children.map(children, (child) => {
+      if (!this.refs[child.key]) {
+        this.newChildKey = child.key;
+      }
       return React.cloneElement(child, {
         ref: child.key
       });
@@ -67,14 +84,11 @@ export default class XexeuFlip extends React.Component {
 
   render() {
     return (
-      <ReactCSSTransitionGroup
+      <div
         style={{width: "100%"}}
-        transitionName={this.props.reactTransitionName}
-        transitionEnterTimeout={this.props.transitionEnterTimeout}
-        transitionLeaveTimeout={this.props.transitionLeaveTimeout}
       >
         {this.cloneChildrenWithRefs(this.props.children)}
-      </ReactCSSTransitionGroup>
+      </div>
     );
   }
 }
