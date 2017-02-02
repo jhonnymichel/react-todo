@@ -76,7 +76,7 @@ export default class XexeuFlip extends React.Component {
       const listItem = this.listItems[i];
       const rect = listItem.element.getBoundingClientRect();
       if (this.shouldChildAnimate(rect, listItem)) {
-        this.applySwapAnimation(rect, listItem);
+        this.applySwapAnimation(rect, listItem, i);
       }
     }
     if (this.newChildKey) {
@@ -89,7 +89,7 @@ export default class XexeuFlip extends React.Component {
     return rect.top !== listItem.positionY || rect.left !== listItem.positionX;
   }
 
-  applySwapAnimation(rect, listItem) {
+  applySwapAnimation(rect, listItem, i) {
     listItem.element.style.transitionDuration = "0ms";
     listItem.element.style.transitionDelay = "0ms";
     listItem.element
@@ -107,7 +107,7 @@ export default class XexeuFlip extends React.Component {
         .transitionDuration = `${this.reorderTransitionDuration}ms`;
       listItem.element
         .style
-        .transitionDelay = `${this.reorderIncreasingDelay}ms`;
+        .transitionDelay = `${this.reorderIncreasingDelay * i}ms`;
       listItem.element.style.transform = "";
     });
   }

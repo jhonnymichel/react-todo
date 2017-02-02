@@ -118,6 +118,7 @@ export default class ToDoList extends React.Component {
           enterInitialStyle={ {transform: "scaleY(0)"} }
           reorderTransitionDuration={300}
           reorderIncreasingDuration={30}
+          transformOrigin="center top"
         >
           {TodoList}
         </XexeuFlip>
