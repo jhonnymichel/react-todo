@@ -12,6 +12,10 @@ export default class XexeuFlip extends React.Component {
   }
 
   componentWillReceiveProps(props) {
+    this.propertyToAnimate =
+      props.propertyToAnimate ||
+      'all';
+
     this.reorderTimingFunction =
       props.reorderTimingFunction ||
       props.timingFunction ||
@@ -98,7 +102,7 @@ export default class XexeuFlip extends React.Component {
     requestAnimationFrame(() => {
       listItem.element
         .style
-        .transitionProperty = 'all';
+        .transitionProperty = this.propertyToAnimate;
       listItem.element
         .style
         .transitionTimingFunction = `${this.reorderTimingFunction}`;
@@ -122,7 +126,7 @@ export default class XexeuFlip extends React.Component {
       for (let property in this.enterInitialStyle) {
         newChild.style[property] = "";
       };
-      newChild.style.transitionProperty = 'all';
+      newChild.style.transitionProperty = this.propertyToAnimate;
       newChild.style.transitionTimingFunction = this.enterTimingFunction;
       newChild.style.transitionDuration = `${this.enterTransitionDuration}ms`;
     });
