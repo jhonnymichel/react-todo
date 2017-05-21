@@ -1,6 +1,9 @@
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
+var webpack = require("webpack");
 var autoprefixer = require("autoprefixer");
 var isDev = true;
+var path = require('path');
 
 var cssLoaderSetup = isDev ? 'css-loader?sourceMap' : 'css-loader?minimize';
 var sassLoaderSetup = isDev ? 'sass-loader?sourceMap' : 'sass-loader';
@@ -12,8 +15,7 @@ module.exports = {
     css: "./app/js/main.css"
   },
   output: {
-    path: __dirname +'/app/dist/js',
-    publicPath: "/dist/js", //the path to the webserver
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
   module: {
@@ -28,11 +30,11 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style-loader', String(cssLoaderSetup+'!'+postcssLoaderStup+'!'+sassLoaderSetup), {publicPath: '../js/'})
+        loader: ExtractTextPlugin.extract('style-loader', String(cssLoaderSetup+'!'+postcssLoaderStup+'!'+sassLoaderSetup))
       },
       {
         test: /\.(png|jpg)$/,
-        loader: 'url-loader'
+        loader: 'file-loader'
       },
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
@@ -60,6 +62,15 @@ module.exports = {
     return [autoprefixer];
   },
   plugins: [
-    new ExtractTextPlugin("../css/styles.css")
+    new ExtractTextPlugin("styles.css"),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: './app/index.html',
+      inject: false
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    new webpack.optimize.UglifyJsPlugin()
   ]
 }
