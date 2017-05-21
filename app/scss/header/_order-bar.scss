@@ -21,6 +21,12 @@
   min-width: 320px;
   position: absolute;
   bottom: 70px;
+  .order-bar__hint-text {
+    @extend .text-shadow;
+    font-size: 14px;
+    color: white;
+    text-align: center;
+  }
   .order-bar__btn-list {
     padding: 0px;
     display: flex;

@@ -23,6 +23,7 @@ export default function OrderByList({options, selected, changeCallback}) {
   });
   return (
     <div className="order-bar">
+      <p className="order-bar__hint-text">hint: you can click a todo to edit it.</p>
       <ul className="order-bar__btn-list">
         {buttons}
       </ul>
