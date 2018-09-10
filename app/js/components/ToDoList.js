@@ -62,8 +62,8 @@ export default class ToDoList extends React.Component {
     }
   }
 
-  mapToDom(list) {
-    return list.map((todo, i) =>
+  render() {
+    return this.state.todoList.map((todo, i) =>
       <ToDo
         key={todo.id}
         todoId={todo.id}
@@ -106,10 +106,6 @@ export default class ToDoList extends React.Component {
   }
 
   render() {
-    const TodoList = this.renderTodos(
-      [...this.state.todoList],
-      this.props.orderBy
-    ).reverse();
     return (
       <div className="todo-list">
         {this.renderEmptyMessage(TodoList.length)}
