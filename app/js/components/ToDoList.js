@@ -56,7 +56,7 @@ export default class ToDoList extends React.Component {
     if (todoAmount === 0) {
       return (
         <h4 className="todo-list__empty-message">
-          Are you sure you don't have anything to do?
+          Are you sure you dont have anything to do?
         </h4>
       );
     }
